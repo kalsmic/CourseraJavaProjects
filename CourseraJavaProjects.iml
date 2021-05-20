@@ -10,14 +10,14 @@
     <orderEntry type="module-library" scope="TEST">
       <library name="JUnit5.7.0">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../CipherProject/lib/junit-jupiter-5.7.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/../CipherProject/lib/junit-jupiter-api-5.7.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/../CipherProject/lib/apiguardian-api-1.1.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/../CipherProject/lib/opentest4j-1.2.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/../CipherProject/lib/junit-platform-commons-1.7.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/../CipherProject/lib/junit-jupiter-params-5.7.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/../CipherProject/lib/junit-jupiter-engine-5.7.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/../CipherProject/lib/junit-platform-engine-1.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/CourseraJavaProjects/lib/junit-jupiter-5.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/CourseraJavaProjects/lib/junit-jupiter-api-5.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/CourseraJavaProjects/lib/apiguardian-api-1.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/CourseraJavaProjects/lib/opentest4j-1.2.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/CourseraJavaProjects/lib/junit-platform-commons-1.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/CourseraJavaProjects/lib/junit-jupiter-params-5.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/CourseraJavaProjects/lib/junit-jupiter-engine-5.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/CourseraJavaProjects/lib/junit-platform-engine-1.7.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -26,14 +26,14 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../CipherProject/lib/junit-jupiter-5.7.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/../CipherProject/lib/junit-jupiter-api-5.7.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/../CipherProject/lib/apiguardian-api-1.1.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/../CipherProject/lib/opentest4j-1.2.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/../CipherProject/lib/junit-platform-commons-1.7.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/../CipherProject/lib/junit-jupiter-params-5.7.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/../CipherProject/lib/junit-jupiter-engine-5.7.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/../CipherProject/lib/junit-platform-engine-1.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/CourseraJavaProjects/lib/junit-jupiter-5.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/CourseraJavaProjects/lib/junit-jupiter-api-5.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/CourseraJavaProjects/lib/apiguardian-api-1.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/CourseraJavaProjects/lib/opentest4j-1.2.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/CourseraJavaProjects/lib/junit-platform-commons-1.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/CourseraJavaProjects/lib/junit-jupiter-params-5.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/CourseraJavaProjects/lib/junit-jupiter-engine-5.7.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/CourseraJavaProjects/lib/junit-platform-engine-1.7.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
