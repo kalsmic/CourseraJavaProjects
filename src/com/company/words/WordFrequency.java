@@ -12,7 +12,6 @@ public class WordFrequency {
         myWords = new ArrayList<String>();
         myFreqs = new ArrayList<Integer>();
     }
-
     public void findUnique(FileResource resource){
         // clear
         myFreqs.clear();
@@ -33,6 +32,7 @@ public class WordFrequency {
 
             }
         }
+        System.out.println("num of unique words = " + myWords.size());
     }
 
     /**
@@ -54,7 +54,7 @@ public class WordFrequency {
 
             }
         }
-
+        System.out.println(myWords.get(indexOfMax) + " occurs " + myFreqs.get(indexOfMax) + " most often with index of " + indexOfMax);
         return indexOfMax;
     }
 

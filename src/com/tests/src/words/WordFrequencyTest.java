@@ -17,8 +17,7 @@ class WordFrequencyTest {
     @BeforeEach
     void setUp() {
         wf = new WordFrequency();
-        FileResource resource = new FileResource("com/tests/src/data/testwordfreqs.txt");
-        wf.findUnique(resource);
+
     }
 
     @AfterEach
@@ -29,7 +28,41 @@ class WordFrequencyTest {
 
     @Test
     void findIndexOfMax() {
+        FileResource resource = new FileResource("com/data/testwordfreqs.txt");
+        wf.findUnique(resource);
         int maxIndex = wf.findIndexOfMax();
         Assert.assertEquals(2, maxIndex);
+
+
+    }
+
+    @Test
+    void findIndexOfMax2() {
+        FileResource resource = new FileResource("com/data/likeit.txt");
+        wf.findUnique(resource);
+        int maxIndex = wf.findIndexOfMax();
+//        Assert.assertEquals(2, maxIndex);
+
+    }
+
+    @Test
+    void findIndexOfMax3() {
+        FileResource resource = new FileResource("com/data/errors.txt");
+        wf.findUnique(resource);
+        wf.findIndexOfMax();
+//        int maxIndex = wf.findUnique();
+//        Assert.assertEquals(2, maxIndex);
+//
+    }
+
+    class Mine {
+        public Mine() {
+
+        }
+
+        public int mineHead() {
+            return 1;
+        }
+
     }
 }
