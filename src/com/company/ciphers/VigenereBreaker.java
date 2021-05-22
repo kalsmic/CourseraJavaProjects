@@ -3,6 +3,7 @@ package com.company.ciphers;
 import edu.duke.FileResource;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -99,5 +100,43 @@ public class VigenereBreaker {
             }
         }
         return count;
+    }
+
+    /**
+     *
+     * @param encrypted string
+     * @param dictionary is a HashSet of Strings dictionary
+     * @return  the decrypted String
+     */
+    public String breakForLanguage(String encrypted, HashSet<String> dictionary) {
+        int highestMatch = 0;
+        String decrypted = null;
+        int kl=0;
+        // try key length for range 1 to 100
+        for(int klength = 1; klength < 100; klength++){
+            // find the key for the message
+            int[] key = tryKeyLength(encrypted, klength, 'e');
+
+            // create a new VigenereCipher object with the found key
+            VigenereCipher vc = new VigenereCipher(key);
+
+            // use calculated key to decrypt the message
+            String currMessage = vc.decrypt(encrypted);
+
+            int numValidWords = countWords(currMessage.trim(),dictionary);
+
+            if(numValidWords > highestMatch){
+                highestMatch = numValidWords;
+                decrypted = currMessage;
+                kl = klength;
+
+            }
+
+        }
+        System.out.println("klength = " +kl);
+        System.out.println("highestMatch = " +highestMatch);
+
+
+        return decrypted;
     }
 }

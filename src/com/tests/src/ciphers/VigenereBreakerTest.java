@@ -98,4 +98,23 @@ class VigenereBreakerTest {
         Assert.assertEquals(3,words);
     }
 
+    @Test
+    void breakForLanguage(){
+        FileResource fr = new FileResource("com/data/dictionaries/English");
+        HashSet<String> dictionary = vb.readDictionary(fr);
+        String expected = new FileResource("src/com/data/athens.txt").asString();
+        String encrypted = new FileResource("src/com/data/athens_keyflute.txt").asString();
+        String decrypted = vb.breakForLanguage(encrypted, dictionary);
+        Assert.assertEquals(expected, decrypted);
+    }
+
+    @Test
+    void breakForLanguage2(){
+        FileResource fr = new FileResource("com/data/dictionaries/English");
+        HashSet<String> dictionary = vb.readDictionary(fr);
+        String expected = "The Tragedy of Hamlet, Prince of Denmark";
+        String encrypted = new FileResource("src/com/data/secretmessage2.txt").asString();
+        String decrypted = vb.breakForLanguage(encrypted, dictionary);
+        Assert.assertEquals(expected, decrypted.substring(0,expected.length()));
+    }
 }
