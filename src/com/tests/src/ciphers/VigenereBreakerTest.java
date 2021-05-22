@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.HashSet;
+
 class VigenereBreakerTest {
     VigenereBreaker vb;
 
@@ -43,6 +45,7 @@ class VigenereBreakerTest {
     }
 
     @Test
+    @DisplayName("Test key length")
     void tryKeyLength() {
         int[] expected = {5, 11, 20, 19, 4};
         String encrypted = new FileResource("src/com/data/athens_keyflute.txt").asString();
@@ -75,4 +78,24 @@ class VigenereBreakerTest {
         Assert.assertEquals(expected, decrypted.substring(0,expected.length()));
 
     }
+
+    @Test
+    void readDictionary(){
+        FileResource fr = new FileResource("com/data/dictionaries/English");
+        HashSet<String> dictionary = vb.readDictionary(fr);
+        Assert.assertEquals(72053,dictionary.size());
+        Assert.assertTrue(dictionary.contains("genesis"));
+        Assert.assertFalse(dictionary.contains("bonjour"));
+        System.out.println(dictionary.toString().substring(0,20));
+    }
+
+    @Test
+    void countWords(){
+        String message = "my God country bonjour";
+        FileResource fr = new FileResource("com/data/dictionaries/English");
+        HashSet<String> englishDictionary = vb.readDictionary(fr);
+        int words = vb.countWords(message, englishDictionary);
+        Assert.assertEquals(3,words);
+    }
+
 }

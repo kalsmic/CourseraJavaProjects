@@ -1,5 +1,11 @@
 package com.company.ciphers;
 
+import edu.duke.FileResource;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
 public class VigenereBreaker {
     /**
      * @param message     is the encrypted message,
@@ -62,4 +68,36 @@ public class VigenereBreaker {
         return vc.decrypt(encrypted);
     }
 
+    /**
+     *
+     * @param fr a FileResource which contains exactly one word per line
+     * @return  the HashSet representing the words in a dictionary
+     */
+    public HashSet<String> readDictionary(FileResource fr) {
+        HashSet<String> dictionary = new HashSet<String>();
+
+        for(String word: fr.lines()){
+            dictionary.add(word.toLowerCase());
+        }
+        return dictionary;
+    }
+
+    /**
+     *
+     * @param message a string to analyze
+     * @param dictionary is a HashSet of Strings
+     * @return  the integer count of how many valid words it found.
+     */
+    public int countWords(String message, HashSet<String> dictionary) {
+        int count = 0;
+        // split the message into an array of string words
+        ArrayList<String> messageArray = new ArrayList<String>(List.of(message.toLowerCase().split("\\W+")));
+
+        for(String word : messageArray){
+            if(dictionary.contains(word)){
+                count += 1;
+            }
+        }
+        return count;
+    }
 }
