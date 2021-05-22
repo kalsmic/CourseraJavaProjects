@@ -3,14 +3,24 @@ package com.company.ciphers;
 public class CaesarBreaker {
 
     private String alphabet = "abcdefghijklmnopqrstuvwxyz";
+    char mostCommon;
+
+    public CaesarBreaker() {
+        mostCommon = 'e';
+    }
+
+    public CaesarBreaker(char c) {
+        mostCommon = c;
+    }
 
     /**
      * Calculates the frequency of all the letters
-     * @param words
+     *
+     * @param words is the input string
      * @return int[] contains frequency of letters in words
      */
     private int[] countLetters(String words) {
-          int[] letterFrequency = new int[26];
+        int[] letterFrequency = new int[26];
 
         for (int index = 0; index < words.length(); index++) {
 
@@ -26,7 +36,7 @@ public class CaesarBreaker {
 
     /**
      *  Computes the index of the letter with the largest frequency
-     * @param freqs
+     * @param freqs list of frequency mapped to the alphabetic index of each letter
      * @return maxIndexValue  the index of the letter with the largest frequency
      */
     private int maxIndex(int[] freqs) {
@@ -45,7 +55,7 @@ public class CaesarBreaker {
     }
 
 
-    private int getKey(String encrypted) {
+    public int getKey(String encrypted) {
 
         //  Calculate the frequency of all the letters using countLetters
         int[] freqs = countLetters(encrypted);
@@ -53,9 +63,10 @@ public class CaesarBreaker {
         //  compute the index of the largest frequency using maxIndex.
         int maxDex = maxIndex(freqs);
         // Use those values to determine the key,
-        int dkey = maxDex - 4;
-        if (maxDex < 4) {
-            dkey = 26 - (4 - maxDex);
+        int mostCommonPos = mostCommon - 'a';
+        int dkey = maxDex - mostCommonPos;
+        if (maxDex < mostCommonPos) {
+            dkey = 26 - (mostCommonPos - maxDex);
         }
         return dkey;
     }
@@ -70,15 +81,13 @@ public class CaesarBreaker {
     }
 
 
-    public String breakCaesarCipher(String input) {
-        int dkey = 26 - getKey(input);
+    public String breakCaesarCipher(String encrypted) {
+        int dkey = 26 - getKey(encrypted);
         //  create a CaesarCipher with the keys
         CaesarCipher cc = new CaesarCipher(dkey);
 
         // call decrypt on the encrypted string.
-        String message = cc.decrypt(input.toString());
-        return message;
-
+        return cc.decrypt(encrypted);
     }
 
     public String breakTwoCaesarCipher(String input) {
@@ -91,8 +100,7 @@ public class CaesarBreaker {
         CaesarCipherTwo cc2 = new CaesarCipherTwo(26 - dkey1, 26 - dkey2);
 
        // call decrypt on the encrypted string.
-        String message = cc2.encrypt(input);
 
-        return message;
+        return cc2.encrypt(input);
     }
 }
