@@ -51,11 +51,28 @@ class VigenereBreakerTest {
     }
 
     @Test
+    void tryKeyLength2() {
+        int[] expected = {3, 20, 10, 4};
+        String encrypted = new FileResource("src/com/data/secretmessage1.txt").asString();
+
+        int[] key = vb.tryKeyLength(encrypted, 4, 'e');
+        Assert.assertArrayEquals(expected, key);
+    }
+
+    @Test
     void breakVigenere() {
         String encrypted = new FileResource("src/com/data/athens_keyflute.txt").asString();
         String expected = new FileResource("src/com/data/athens.txt").asString();
         String decrypted = vb.breakVigenere(encrypted, 5);
         Assert.assertEquals(expected, decrypted);
+
+    }
+    @Test
+    void breakVigenere2() {
+        String encrypted = new FileResource("src/com/data/secretmessage1.txt").asString();
+        String expected = "Enter BRUTUS and CASSIUS, and a throng of Citizens";
+        String decrypted = vb.breakVigenere(encrypted, 4);
+        Assert.assertEquals(expected, decrypted.substring(0,expected.length()));
 
     }
 }
