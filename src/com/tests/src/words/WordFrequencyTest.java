@@ -55,14 +55,4 @@ class WordFrequencyTest {
 //
     }
 
-    class Mine {
-        public Mine() {
-
-        }
-
-        public int mineHead() {
-            return 1;
-        }
-
-    }
 }
