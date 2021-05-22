@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 class VigenereBreakerTest {
@@ -116,5 +117,48 @@ class VigenereBreakerTest {
         String encrypted = new FileResource("src/com/data/secretmessage2.txt").asString();
         String decrypted = vb.breakForLanguage(encrypted, dictionary);
         Assert.assertEquals(expected, decrypted.substring(0,expected.length()));
+    }
+
+
+    @DisplayName("Get most common letter for language")
+    @ParameterizedTest(name = "{index}=> filename={0},expected={1}")
+    @CsvSource({
+            "English,e ",
+            "Danish,e",
+            "Dutch, e",
+            "French, e",
+            "German, e",
+            "Italian, a",
+            "Portuguese, a",
+            "Spanish, a",
+    })
+    void mostCommonCharIn(String filename, char expected){
+        FileResource fr = new FileResource("com/data/dictionaries/"+filename);
+        HashSet<String> dictionary = vb.readDictionary(fr);
+        char mostCommon = vb.mostCommonCharIn(dictionary);
+        System.out.println(mostCommon);
+        Character c1 = expected;
+        Character c2 = mostCommon;
+        Assert.assertTrue(c1.equals(c2));
+    }
+
+    @Test
+    void breakForAllLangs(){
+        String expected = new FileResource("src/com/data/athens.txt").asString();
+        String encrypted = new FileResource("src/com/data/athens_keyflute.txt").asString();
+
+        HashMap<String, HashSet<String>> languages = new HashMap<String, HashSet<String>>();
+
+        languages.put("English", vb.readDictionary(new FileResource("com/data/dictionaries/English")) );
+        languages.put("Danish", vb.readDictionary(new FileResource("com/data/dictionaries/Danish")) );
+        languages.put("Dutch", vb.readDictionary(new FileResource("com/data/dictionaries/Dutch")) );
+        languages.put("French", vb.readDictionary(new FileResource("com/data/dictionaries/French")) );
+        languages.put("German", vb.readDictionary(new FileResource("com/data/dictionaries/German")) );
+        languages.put("Italian", vb.readDictionary(new FileResource("com/data/dictionaries/Italian")) );
+        languages.put("Portuguese", vb.readDictionary(new FileResource("com/data/dictionaries/Portuguese")) );
+        languages.put("Spanish", vb.readDictionary(new FileResource("com/data/dictionaries/Spanish")) );
+        String decrypted = vb.breakForAllLangs(encrypted, languages);
+        Assert.assertEquals(expected, decrypted);
+
     }
 }

@@ -111,11 +111,11 @@ public class VigenereBreaker {
     public String breakForLanguage(String encrypted, HashSet<String> dictionary) {
         int highestMatch = 0;
         String decrypted = null;
-        int kl=0;
+        char mostCommon = mostCommonCharIn(dictionary);
         // try key length for range 1 to 100
         for(int klength = 1; klength < 100; klength++){
             // find the key for the message
-            int[] key = tryKeyLength(encrypted, klength, 'e');
+            int[] key = tryKeyLength(encrypted, klength, mostCommon);
 
             // create a new VigenereCipher object with the found key
             VigenereCipher vc = new VigenereCipher(key);
@@ -128,14 +128,76 @@ public class VigenereBreaker {
             if(numValidWords > highestMatch){
                 highestMatch = numValidWords;
                 decrypted = currMessage;
-                kl = klength;
-
             }
 
         }
-        System.out.println("klength = " +kl);
-        System.out.println("highestMatch = " +highestMatch);
 
+        return decrypted;
+    }
+
+    /**
+     * @param dictionary is a HashSet of Strings dictionary
+     * @return the most commonly occurring character which appears most often in the words in dictionary
+     */
+    public char mostCommonCharIn(HashSet<String> dictionary) {
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        int[] frequency = new int[27];
+
+        for (String word : dictionary) {
+            for (char c : word.toCharArray()) {
+                int letterIndex = alphabet.indexOf(c);
+
+                if (letterIndex != -1) {
+                    frequency[letterIndex] += 1;
+                }
+            }
+        }
+
+        int highestSoFar = 0;
+        int highestIndex = 0;
+        for(int i =0; i<frequency.length; i++){
+            if(frequency[i] > highestSoFar){
+                highestIndex = i;
+                highestSoFar = frequency[i];
+            }
+        }
+        return alphabet.charAt(highestIndex);
+    }
+
+    /**
+     *
+     * @param encrypted is a String encrypted
+     * @param languages is s HashMap,mapping a String representing the name of a language to a HashSet of Strings
+     *                 containing the words in that language.
+     * @return the decrypted message
+     */
+    public String breakForAllLangs(String encrypted, HashMap<String, HashSet<String>> languages) {
+        String decrypted = null;
+        int mostWords =0;
+        String messageLanguage = null;
+        // look at each language
+        for(String language:languages.keySet()){
+
+            HashSet<String> dictionary = languages.get(language);
+
+            // Try breaking the encryption for each language
+            String currMessage = breakForLanguage(encrypted,dictionary);
+
+            // count how many words match for given language
+            int currCount = countWords(currMessage, dictionary);
+            // if the current words match more than the mostSoFar
+            if(currCount > mostWords){
+                // set most words to current words
+                mostWords = currCount;
+                // set decrypted message to current message
+                decrypted = currMessage;
+                // set language to current language
+                messageLanguage = language;
+            }
+        }
+
+    System.out.println("Language is " + messageLanguage);
+    System.out.println(mostWords +" words matched");
 
         return decrypted;
     }
