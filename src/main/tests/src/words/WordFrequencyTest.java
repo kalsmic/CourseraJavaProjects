@@ -25,7 +25,7 @@ class WordFrequencyTest {
 
     @Test
     void findIndexOfMax() {
-        FileResource resource = new FileResource("com/data/testwordfreqs.txt");
+        FileResource resource = new FileResource("main/data/testwordfreqs.txt");
         wf.findUnique(resource);
         int maxIndex = wf.findIndexOfMax();
         Assert.assertEquals(2, maxIndex);
@@ -35,7 +35,7 @@ class WordFrequencyTest {
 
     @Test
     void findIndexOfMax2() {
-        FileResource resource = new FileResource("com/data/likeit.txt");
+        FileResource resource = new FileResource("main/data/likeit.txt");
         wf.findUnique(resource);
         int maxIndex = wf.findIndexOfMax();
 //        Assert.assertEquals(2, maxIndex);
@@ -44,7 +44,7 @@ class WordFrequencyTest {
 
     @Test
     void findIndexOfMax3() {
-        FileResource resource = new FileResource("com/data/errors.txt");
+        FileResource resource = new FileResource("main/data/errors.txt");
         wf.findUnique(resource);
         wf.findIndexOfMax();
 //        int maxIndex = wf.findUnique();

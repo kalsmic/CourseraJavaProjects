@@ -8,7 +8,7 @@ class CharactersInPlayTest {
 
     @Test
     void charactersWithNumParts() {
-        FileResource resource = new FileResource("com/data/likeit.txt");
+        FileResource resource = new FileResource("main/data/likeit.txt");
         CharactersInPlay cip = new CharactersInPlay();
         cip.findAllCharacters(resource);
         cip.charactersWithNumParts(2, 3);
@@ -17,7 +17,7 @@ class CharactersInPlayTest {
 
     @Test
     void charactersWithNumParts2() {
-        FileResource resource = new FileResource("com/data/errors.txt");
+        FileResource resource = new FileResource("main/data/errors.txt");
         CharactersInPlay cip = new CharactersInPlay();
         cip.findAllCharacters(resource);
         cip.charactersWithNumParts(70, 300);
@@ -26,7 +26,7 @@ class CharactersInPlayTest {
 
     @Test
     void charactersWithNumParts3() {
-        FileResource resource = new FileResource("com/data/likeit.txt");
+        FileResource resource = new FileResource("main/data/likeit.txt");
         CharactersInPlay cip = new CharactersInPlay();
         cip.findAllCharacters(resource);
         cip.charactersWithNumParts(10, 15);

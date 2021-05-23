@@ -3,13 +3,13 @@ package main.tests.src.ciphers;
 import main.company.ciphers.CaesarCipher;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CaesarCipherTest {
     @Test
     void encrypt() {
-        String  message = "FIRST LEGION ATTACK EAST FLANK!";
-        String expected =  "CFOPQ IBDFLK XQQXZH BXPQ CIXKH!";
+        String message = "FIRST LEGION ATTACK EAST FLANK!";
+        String expected = "CFOPQ IBDFLK XQQXZH BXPQ CIXKH!";
         CaesarCipher cc = new CaesarCipher(23);
         String encrypted = cc.encrypt(message);
         assertEquals(encrypted, expected);
@@ -25,8 +25,8 @@ class CaesarCipherTest {
 
     @Test
     void decrypt() {
-        String  expected = "FIRST LEGION ATTACK EAST FLANK!";
-        String message =  "CFOPQ IBDFLK XQQXZH BXPQ CIXKH!";
+        String expected = "FIRST LEGION ATTACK EAST FLANK!";
+        String message = "CFOPQ IBDFLK XQQXZH BXPQ CIXKH!";
         CaesarCipher cc = new CaesarCipher(23);
         String decrypted = cc.decrypt(message);
         assertEquals(decrypted, expected);

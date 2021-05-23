@@ -2,7 +2,6 @@ package main.tests.src.ciphers;
 
 import main.company.ciphers.VigenereBreaker;
 import edu.duke.FileResource;
-import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,6 +11,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.HashMap;
 import java.util.HashSet;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class VigenereBreakerTest {
     VigenereBreaker vb;
@@ -42,80 +43,81 @@ class VigenereBreakerTest {
             "abcdefghijklm, 4, 5,ej",
     })
     void sliceString(String message, int whichSlice, int totalSlices, String expected) {
-        Assert.assertEquals(expected, vb.sliceString(message, whichSlice, totalSlices));
+        assertEquals(expected, vb.sliceString(message, whichSlice, totalSlices));
     }
 
     @Test
     @DisplayName("Test key length")
     void tryKeyLength() {
         int[] expected = {5, 11, 20, 19, 4};
-        String encrypted = new FileResource("src/com/data/athens_keyflute.txt").asString();
+        String encrypted = new FileResource("src/main/data/athens_keyflute.txt").asString();
         int[] key = vb.tryKeyLength(encrypted, 5, 'e');
-        Assert.assertArrayEquals(expected, key);
+        assertArrayEquals(expected, key);
     }
 
     @Test
     void tryKeyLength2() {
         int[] expected = {3, 20, 10, 4};
-        String encrypted = new FileResource("src/com/data/secretmessage1.txt").asString();
+        String encrypted = new FileResource("src/main/data/secretmessage1.txt").asString();
 
         int[] key = vb.tryKeyLength(encrypted, 4, 'e');
-        Assert.assertArrayEquals(expected, key);
+        assertArrayEquals(expected, key);
     }
 
     @Test
     void breakVigenere() {
-        String encrypted = new FileResource("src/com/data/athens_keyflute.txt").asString();
-        String expected = new FileResource("src/com/data/athens.txt").asString();
+        String encrypted = new FileResource("src/main/data/athens_keyflute.txt").asString();
+        String expected = new FileResource("src/main/data/athens.txt").asString();
         String decrypted = vb.breakVigenere(encrypted, 5);
-        Assert.assertEquals(expected, decrypted);
+        assertEquals(expected, decrypted);
 
     }
+
     @Test
     void breakVigenere2() {
-        String encrypted = new FileResource("src/com/data/secretmessage1.txt").asString();
+        String encrypted = new FileResource("src/main/data/secretmessage1.txt").asString();
         String expected = "Enter BRUTUS and CASSIUS, and a throng of Citizens";
         String decrypted = vb.breakVigenere(encrypted, 4);
-        Assert.assertEquals(expected, decrypted.substring(0,expected.length()));
+        assertEquals(expected, decrypted.substring(0, expected.length()));
 
     }
 
     @Test
-    void readDictionary(){
-        FileResource fr = new FileResource("com/data/dictionaries/English");
+    void readDictionary() {
+        FileResource fr = new FileResource("main/data/dictionaries/English");
         HashSet<String> dictionary = vb.readDictionary(fr);
-        Assert.assertEquals(72053,dictionary.size());
-        Assert.assertTrue(dictionary.contains("genesis"));
-        Assert.assertFalse(dictionary.contains("bonjour"));
+        assertEquals(72053, dictionary.size());
+        assertTrue(dictionary.contains("genesis"));
+        assertFalse(dictionary.contains("bonjour"));
     }
 
     @Test
-    void countWords(){
+    void countWords() {
         String message = "my God country bonjour";
-        FileResource fr = new FileResource("com/data/dictionaries/English");
+        FileResource fr = new FileResource("main/data/dictionaries/English");
         HashSet<String> englishDictionary = vb.readDictionary(fr);
         int words = vb.countWords(message, englishDictionary);
-        Assert.assertEquals(3,words);
+        assertEquals(3, words);
     }
 
     @Test
-    void breakForLanguage(){
-        FileResource fr = new FileResource("com/data/dictionaries/English");
+    void breakForLanguage() {
+        FileResource fr = new FileResource("main/data/dictionaries/English");
         HashSet<String> dictionary = vb.readDictionary(fr);
-        String expected = new FileResource("src/com/data/athens.txt").asString();
-        String encrypted = new FileResource("src/com/data/athens_keyflute.txt").asString();
+        String expected = new FileResource("src/main/data/athens.txt").asString();
+        String encrypted = new FileResource("src/main/data/athens_keyflute.txt").asString();
         String decrypted = vb.breakForLanguage(encrypted, dictionary);
-        Assert.assertEquals(expected, decrypted);
+        assertEquals(expected, decrypted);
     }
 
     @Test
-    void breakForLanguage2(){
-        FileResource fr = new FileResource("com/data/dictionaries/English");
+    void breakForLanguage2() {
+        FileResource fr = new FileResource("main/data/dictionaries/English");
         HashSet<String> dictionary = vb.readDictionary(fr);
         String expected = "The Tragedy of Hamlet, Prince of Denmark";
-        String encrypted = new FileResource("src/com/data/secretmessage2.txt").asString();
+        String encrypted = new FileResource("src/main/data/secretmessage2.txt").asString();
         String decrypted = vb.breakForLanguage(encrypted, dictionary);
-        Assert.assertEquals(expected, decrypted.substring(0,expected.length()));
+        assertEquals(expected, decrypted.substring(0, expected.length()));
     }
 
 
@@ -131,33 +133,33 @@ class VigenereBreakerTest {
             "Portuguese, a",
             "Spanish, a",
     })
-    void mostCommonCharIn(String filename, char expected){
-        FileResource fr = new FileResource("com/data/dictionaries/"+filename);
+    void mostCommonCharIn(String filename, char expected) {
+        FileResource fr = new FileResource("main/data/dictionaries/" + filename);
         HashSet<String> dictionary = vb.readDictionary(fr);
         char mostCommon = vb.mostCommonCharIn(dictionary);
         System.out.println(mostCommon);
         Character c1 = expected;
         Character c2 = mostCommon;
-        Assert.assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
     }
 
     @Test
-    void breakForAllLangs(){
-        String expected = new FileResource("src/com/data/athens.txt").asString();
-        String encrypted = new FileResource("src/com/data/athens_keyflute.txt").asString();
+    void breakForAllLangs() {
+        String expected = new FileResource("src/main/data/athens.txt").asString();
+        String encrypted = new FileResource("src/main/data/athens_keyflute.txt").asString();
 
         HashMap<String, HashSet<String>> languages = new HashMap<String, HashSet<String>>();
 
-        languages.put("English", vb.readDictionary(new FileResource("com/data/dictionaries/English")) );
-        languages.put("Danish", vb.readDictionary(new FileResource("com/data/dictionaries/Danish")) );
-        languages.put("Dutch", vb.readDictionary(new FileResource("com/data/dictionaries/Dutch")) );
-        languages.put("French", vb.readDictionary(new FileResource("com/data/dictionaries/French")) );
-        languages.put("German", vb.readDictionary(new FileResource("com/data/dictionaries/German")) );
-        languages.put("Italian", vb.readDictionary(new FileResource("com/data/dictionaries/Italian")) );
-        languages.put("Portuguese", vb.readDictionary(new FileResource("com/data/dictionaries/Portuguese")) );
-        languages.put("Spanish", vb.readDictionary(new FileResource("com/data/dictionaries/Spanish")) );
+        languages.put("English", vb.readDictionary(new FileResource("main/data/dictionaries/English")));
+        languages.put("Danish", vb.readDictionary(new FileResource("main/data/dictionaries/Danish")));
+        languages.put("Dutch", vb.readDictionary(new FileResource("main/data/dictionaries/Dutch")));
+        languages.put("French", vb.readDictionary(new FileResource("main/data/dictionaries/French")));
+        languages.put("German", vb.readDictionary(new FileResource("main/data/dictionaries/German")));
+        languages.put("Italian", vb.readDictionary(new FileResource("main/data/dictionaries/Italian")));
+        languages.put("Portuguese", vb.readDictionary(new FileResource("main/data/dictionaries/Portuguese")));
+        languages.put("Spanish", vb.readDictionary(new FileResource("main/data/dictionaries/Spanish")));
         String decrypted = vb.breakForAllLangs(encrypted, languages);
-        Assert.assertEquals(expected, decrypted);
+        assertEquals(expected, decrypted);
 
     }
 }

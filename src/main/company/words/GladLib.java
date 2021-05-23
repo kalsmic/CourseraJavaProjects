@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class GladLib {
     private static final String dataSourceURL = "http://dukelearntoprogram.com/course3/data";
-    private static final String dataSourceDirectory = "com/data";
+    private static final String dataSourceDirectory = "main/data";
     private ArrayList<String> adjectiveList;
     private ArrayList<String> nounList;
     private ArrayList<String> colorList;
@@ -150,7 +150,7 @@ public class GladLib {
     public void makeStory() {
         seenList.clear();
         System.out.println("\n");
-        String story = fromTemplate("com/data/madtemplate3.txt");
+        String story = fromTemplate("main/data/madtemplate3.txt");
         printOut(story, 60);
         System.out.println("\n");
         System.out.println("seen words " + seenList.size());

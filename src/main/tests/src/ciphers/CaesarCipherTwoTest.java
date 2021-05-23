@@ -3,7 +3,7 @@ package main.tests.src.ciphers;
 import main.company.ciphers.CaesarCipherTwo;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CaesarCipherTwoTest {
     String message1 = "Aran ajd Eiihy hwva avel earee gnean ewro";

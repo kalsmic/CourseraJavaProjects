@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class GladLibMap {
     private static final String dataSourceURL = "http://dukelearntoprogram.com/course3/data";
-    private static final String dataSourceDirectory = "com/data";
+    private static final String dataSourceDirectory = "main/data";
     private final HashMap<String, ArrayList<String>> myMap;
     private final HashMap<String, String> myLabelSource = new HashMap<String, String>();
     private final Random myRandom;
@@ -145,7 +145,7 @@ public class GladLibMap {
     public void makeStory() {
         wordsConsideredList.clear();
         System.out.println("\n");
-        String story = fromTemplate("com/data/madtemplate3.txt");
+        String story = fromTemplate("main/data/madtemplate3.txt");
         printOut(story, 60);
         System.out.println("\n");
         System.out.println("Total number of words replaced is " + wordsConsideredList.size());

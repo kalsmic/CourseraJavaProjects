@@ -22,11 +22,11 @@ class CaesarBreakerTest {
         String expected = "The name of the Java Mascot is Duke. Woeoeee!";
         assertEquals(decrypted, expected);
 
-        FileResource fr = new FileResource("com/data/mysteryTwoKeysQuiz.txt");
+        FileResource fr = new FileResource("main/data/mysteryTwoKeysQuiz.txt");
         message = fr.asString();
         decrypted = cb.breakTwoCaesarCipher(message);
         expected = "Duke Computer Science Department Overview";
-        assertEquals(decrypted.substring(0,41), expected);
+        assertEquals(decrypted.substring(0, 41), expected);
 
 
     }
