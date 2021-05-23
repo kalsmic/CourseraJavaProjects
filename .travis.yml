@@ -1,4 +1,7 @@
 ---
+env:
+  global:
+    - CODECOV_TOKEN=:b2d4d5ec-a427-4bad-b8b5-4203601aab8a
 jdk:
   - "openjdk11"
 language: "java"
