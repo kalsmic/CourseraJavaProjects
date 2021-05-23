@@ -26,6 +26,15 @@
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>edu.duke</groupId>
+            <artifactId>edu.duke</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/courserajava.jar</systemPath>
+        </dependency>
+
+
     </dependencies>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
