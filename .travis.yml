@@ -1,11 +1,8 @@
 ---
-env:
-  global:
-    - "CODECOV_TOKEN=:uuid-repo-token-codecov"
 jdk:
   - "openjdk11"
 language: "java"
 script:
-  - "mvn clean package"
+  - "mvn clean"
 after_success:
-  - "bash <(curl -s https://codecov.io/bash) -t uuid-repo-token-codecov"
+  - "bash <(curl -s https://codecov.io/bash)"
