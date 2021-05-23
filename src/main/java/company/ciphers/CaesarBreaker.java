@@ -2,7 +2,7 @@ package main.java.company.ciphers;
 
 public class CaesarBreaker {
 
-    char mostCommon;
+    private char mostCommon;
     private final String alphabet = "abcdefghijklmnopqrstuvwxyz";
 
     public CaesarBreaker() {
