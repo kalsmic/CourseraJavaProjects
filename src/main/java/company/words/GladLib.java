@@ -9,6 +9,7 @@ import java.util.Random;
 public class GladLib {
     private static final String dataSourceURL = "http://dukelearntoprogram.com/course3/data";
     private static final String dataSourceDirectory = "main/data";
+    private final Random myRandom;
     private ArrayList<String> adjectiveList;
     private ArrayList<String> nounList;
     private ArrayList<String> colorList;
@@ -19,7 +20,6 @@ public class GladLib {
     private ArrayList<String> verbList;
     private ArrayList<String> fruitList;
     private ArrayList<String> seenList;
-    private final Random myRandom;
 
     public GladLib() {
         initializeFromSource(dataSourceDirectory);
@@ -50,37 +50,30 @@ public class GladLib {
     }
 
     private String getSubstitute(String label) {
-        if (label.equals("country")) {
-            return randomFrom(countryList);
+        switch (label) {
+            case "country":
+                return randomFrom(countryList);
+            case "color":
+                return randomFrom(colorList);
+            case "noun":
+                return randomFrom(nounList);
+            case "name":
+                return randomFrom(nameList);
+            case "adjective":
+                return randomFrom(adjectiveList);
+            case "animal":
+                return randomFrom(animalList);
+            case "timeframe":
+                return randomFrom(timeList);
+            case "number":
+                return "" + myRandom.nextInt(50) + 5;
+            case "fruit":
+                return randomFrom(fruitList);
+            case "verb":
+                return randomFrom(verbList);
+            default:
+                return "**UNKNOWN**";
         }
-        if (label.equals("color")) {
-            return randomFrom(colorList);
-        }
-        if (label.equals("noun")) {
-            return randomFrom(nounList);
-        }
-        if (label.equals("name")) {
-            return randomFrom(nameList);
-        }
-        if (label.equals("adjective")) {
-            return randomFrom(adjectiveList);
-        }
-        if (label.equals("animal")) {
-            return randomFrom(animalList);
-        }
-        if (label.equals("timeframe")) {
-            return randomFrom(timeList);
-        }
-        if (label.equals("number")) {
-            return "" + myRandom.nextInt(50) + 5;
-        }
-        if (label.equals("fruit")) {
-            return randomFrom(fruitList);
-        }
-        if (label.equals("verb")) {
-            return randomFrom(verbList);
-        }
-        return "**UNKNOWN**";
     }
 
     private String processWord(String w) {
