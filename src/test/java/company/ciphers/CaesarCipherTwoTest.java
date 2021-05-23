@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CaesarCipherTwoTest {
-    String message1 = "Aran ajd Eiihy hwva avel earee gnean ewro";
-    String message2 = "Can you imagine life WITHOUT the internet AND computers in your pocket?";
-    String message3 = "Hfs cpwewloj loks cd Hoto kyg Cyy.";
+    private String message1 = "Aran ajd Eiihy hwva avel earee gnean ewro";
+    private String message2 = "Can you imagine life WITHOUT the internet AND computers in your pocket?";
+    private String message3 = "Hfs cpwewloj loks cd Hoto kyg Cyy.";
 
     @Test
     void encrypt() {
