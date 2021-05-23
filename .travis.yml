@@ -1,0 +1,6 @@
+---
+jdk:
+  - openjdk11
+language: java
+script:
+  - "mvn clean package"
