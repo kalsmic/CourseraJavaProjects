@@ -15,7 +15,7 @@ import java.util.HashSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 class VigenereBreakerTest {
-    VigenereBreaker vb;
+    private VigenereBreaker vb;
 
     @BeforeEach
     void setUp() {
@@ -26,7 +26,7 @@ class VigenereBreakerTest {
     void tearDown() {
     }
 
-    @DisplayName("Test slice string")
+
     @ParameterizedTest(name = "{index}=> message={0},whichSlice={1},totalSlices={2}, expected={3}")
     @CsvSource({
             "abcdefghijklm,0,3,adgjm ",
@@ -47,7 +47,6 @@ class VigenereBreakerTest {
     }
 
     @Test
-    @DisplayName("Test key length")
     void tryKeyLength() {
         int[] expected = {5, 11, 20, 19, 4};
         String encrypted = new FileResource("src/main/resources/data/athens_keyflute.txt").asString();
