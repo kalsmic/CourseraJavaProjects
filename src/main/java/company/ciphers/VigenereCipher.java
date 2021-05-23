@@ -3,7 +3,7 @@ package main.java.company.ciphers;
 import java.util.Arrays;
 
 public class VigenereCipher {
-    CaesarCipher[] ciphers;
+    private CaesarCipher[] ciphers;
 
     /**
      * @param key is an array of integers
