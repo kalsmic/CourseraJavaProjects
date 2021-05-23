@@ -87,7 +87,6 @@ class VigenereBreakerTest {
         Assert.assertEquals(72053,dictionary.size());
         Assert.assertTrue(dictionary.contains("genesis"));
         Assert.assertFalse(dictionary.contains("bonjour"));
-        System.out.println(dictionary.toString().substring(0,20));
     }
 
     @Test
