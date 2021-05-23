@@ -22,10 +22,6 @@ class VigenereBreakerTest {
         vb = new VigenereBreaker();
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
 
     @ParameterizedTest(name = "{index}=> message={0},whichSlice={1},totalSlices={2}, expected={3}")
     @CsvSource({
