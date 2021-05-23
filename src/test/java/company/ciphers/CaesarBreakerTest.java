@@ -11,11 +11,6 @@ class CaesarBreakerTest {
 
 
     @Test
-    void breakCaesarCipher() {
-
-    }
-
-    @Test
     void breakTwoCaesarCipher() {
         String message = "Aal uttx hm aal Qtct Fhljha pl Wbdl. Pvxvxlx!";
         String decrypted = cb.breakTwoCaesarCipher(message);
