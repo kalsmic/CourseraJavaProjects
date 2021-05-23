@@ -37,6 +37,8 @@
                         </goals>
                         <configuration>
                             <title>Coverage with JaCoCo</title>
+                            <dataFile>target/jacoco.exec</dataFile>
+                            <outputDirectory>target/my-reports</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
