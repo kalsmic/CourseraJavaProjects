@@ -5,8 +5,8 @@ import edu.duke.FileResource;
 import java.util.ArrayList;
 
 public class CharactersInPlay {
-    private ArrayList<String> characterNames;
-    private ArrayList<Integer> numSpeakingParts;
+    private final ArrayList<String> characterNames;
+    private final ArrayList<Integer> numSpeakingParts;
 
     public CharactersInPlay() {
         characterNames = new ArrayList<String>();

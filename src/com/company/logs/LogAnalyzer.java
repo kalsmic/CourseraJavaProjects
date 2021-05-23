@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LogAnalyzer {
-    private ArrayList<LogEntry> records;
+    private final ArrayList<LogEntry> records;
 
     public LogAnalyzer() {
         records = new ArrayList<LogEntry>();

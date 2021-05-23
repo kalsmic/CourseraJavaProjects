@@ -1,12 +1,12 @@
 package com.company.ciphers;
 
 public class CaesarCipherTwo {
-    private String alphabet;
+    private final String alphabet;
 
-    private String shiftedAlphabet1;
-    private String shiftedAlphabet2;
-    private int key1;
-    private int key2;
+    private final String shiftedAlphabet1;
+    private final String shiftedAlphabet2;
+    private final int key1;
+    private final int key2;
 
     public CaesarCipherTwo(int key1, int key2) {
         alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -27,10 +27,10 @@ public class CaesarCipherTwo {
             if (alphabeticIndex != -1) {
 
                 // if start is 0 use alphabet shifted with key1 else use key2
-                String shiftedAlphabet = (index % 2 == 0) ? shiftedAlphabet1: shiftedAlphabet2;
+                String shiftedAlphabet = (index % 2 == 0) ? shiftedAlphabet1 : shiftedAlphabet2;
 
                 // if character is lower case use lowercase shifted alphabet otherwise use uppercase shifted alphabet
-                shiftedAlphabet =  Character.isLowerCase(currentCharacter) ? shiftedAlphabet: shiftedAlphabet.toUpperCase();
+                shiftedAlphabet = Character.isLowerCase(currentCharacter) ? shiftedAlphabet : shiftedAlphabet.toUpperCase();
 
                 // get shifted characted
                 currentCharacter = shiftedAlphabet.charAt(alphabeticIndex);

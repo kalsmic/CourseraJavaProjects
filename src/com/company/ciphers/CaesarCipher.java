@@ -3,7 +3,7 @@ package com.company.ciphers;
 public class CaesarCipher {
     private String alphabet;
     private String shiftedAlphabet;
-    private int theKey;
+    private final int theKey;
 
     public CaesarCipher(int key) {
         theKey = key;

@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class WordsInFiles {
-    private HashMap<String, ArrayList<String>> wordFileMap;
+    private final HashMap<String, ArrayList<String>> wordFileMap;
 
     public WordsInFiles() {
         wordFileMap = new HashMap<String, ArrayList<String>>();

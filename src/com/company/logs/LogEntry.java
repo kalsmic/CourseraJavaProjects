@@ -3,11 +3,11 @@ package com.company.logs;
 import java.util.Date;
 
 public class LogEntry {
-    private String ipAddress;
-    private Date accessTime;
-    private String request;
-    private int statusCode;
-    private int bytesReturned;
+    private final String ipAddress;
+    private final Date accessTime;
+    private final String request;
+    private final int statusCode;
+    private final int bytesReturned;
 
     public LogEntry(String ipAddress, Date accessTime, String request, int statusCode, int bytesReturned) {
         this.ipAddress = ipAddress;

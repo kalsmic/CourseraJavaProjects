@@ -2,8 +2,8 @@ package com.company.ciphers;
 
 public class CaesarBreaker {
 
-    private String alphabet = "abcdefghijklmnopqrstuvwxyz";
     char mostCommon;
+    private final String alphabet = "abcdefghijklmnopqrstuvwxyz";
 
     public CaesarBreaker() {
         mostCommon = 'e';
@@ -35,7 +35,8 @@ public class CaesarBreaker {
     }
 
     /**
-     *  Computes the index of the letter with the largest frequency
+     * Computes the index of the letter with the largest frequency
+     *
      * @param freqs list of frequency mapped to the alphabetic index of each letter
      * @return maxIndexValue  the index of the letter with the largest frequency
      */
@@ -99,7 +100,7 @@ public class CaesarBreaker {
         //  create a CaesarCipher with the keys
         CaesarCipherTwo cc2 = new CaesarCipherTwo(26 - dkey1, 26 - dkey2);
 
-       // call decrypt on the encrypted string.
+        // call decrypt on the encrypted string.
 
         return cc2.encrypt(input);
     }

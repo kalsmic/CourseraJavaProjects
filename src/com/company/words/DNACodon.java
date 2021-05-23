@@ -3,7 +3,7 @@ package com.company.words;
 import java.util.HashMap;
 
 public class DNACodon {
-    private HashMap<String, Integer> codonCount;
+    private final HashMap<String, Integer> codonCount;
 
     public DNACodon() {
         codonCount = new HashMap<String, Integer>();
