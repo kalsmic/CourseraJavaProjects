@@ -1,7 +1,7 @@
 package test.java.company.words;
 
-import main.java.company.words.CharactersInPlay;
 import edu.duke.FileResource;
+import main.java.company.words.CharactersInPlay;
 import org.junit.jupiter.api.Test;
 
 class CharactersInPlayTest {

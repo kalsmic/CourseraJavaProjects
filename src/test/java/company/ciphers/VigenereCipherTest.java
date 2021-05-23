@@ -1,7 +1,7 @@
 package test.java.company.ciphers;
 
-import main.java.company.ciphers.VigenereCipher;
 import edu.duke.FileResource;
+import main.java.company.ciphers.VigenereCipher;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 

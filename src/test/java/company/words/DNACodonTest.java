@@ -2,8 +2,8 @@ package test.java.company.words;
 
 import edu.duke.FileResource;
 import main.java.company.words.DNACodon;
-
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 

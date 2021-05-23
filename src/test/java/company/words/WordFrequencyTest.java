@@ -1,7 +1,7 @@
 package test.java.company.words;
 
-import main.java.company.words.WordFrequency;
 import edu.duke.FileResource;
+import main.java.company.words.WordFrequency;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

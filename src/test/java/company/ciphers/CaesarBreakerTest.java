@@ -1,7 +1,7 @@
 package test.java.company.ciphers;
 
-import main.java.company.ciphers.CaesarBreaker;
 import edu.duke.FileResource;
+import main.java.company.ciphers.CaesarBreaker;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
