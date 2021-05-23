@@ -1,11 +1,9 @@
 ---
-env:
-  global:
-    - CODECOV_TOKEN=:b2d4d5ec-a427-4bad-b8b5-4203601aab8a
 jdk:
   - "openjdk11"
 language: "java"
 script:
-  - "mvn clean"
+  - "mvn clean package"
+  - "mvn jacoco:report"
 after_success:
   - "bash <(curl -s https://codecov.io/bash)"
