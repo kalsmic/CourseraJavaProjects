@@ -32,5 +32,14 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.7.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.7.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-params:5.7.2" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: edu.duke:edu.duke:1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/main/resources/courserajava.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
