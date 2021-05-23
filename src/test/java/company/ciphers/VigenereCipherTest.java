@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class VigenereCipherTest {
-    int[] key = {17, 14, 12, 4};
-    VigenereCipher vc;
-    String testMessage = new FileResource("src/main/resources/data/titus-small.txt").asString();
-    String testEncryptedMessage = new FileResource("src/main/resources/data/titus-small-key17-14-12-4.txt").asString();
+    private int[] key = {17, 14, 12, 4};
+    private VigenereCipher vc;
+    private String testMessage = new FileResource("src/main/resources/data/titus-small.txt").asString();
+    private String testEncryptedMessage = new FileResource("src/main/resources/data/titus-small-key17-14-12-4.txt").asString();
 
 
     @AfterEach
