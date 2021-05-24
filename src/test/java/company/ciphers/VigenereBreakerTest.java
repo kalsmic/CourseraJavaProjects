@@ -1,7 +1,7 @@
 package test.java.company.ciphers;
 
-import main.java.company.ciphers.VigenereBreaker;
 import edu.duke.FileResource;
+import main.java.company.ciphers.VigenereBreaker;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,18 +15,14 @@ import java.util.HashSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 class VigenereBreakerTest {
-    VigenereBreaker vb;
+    private VigenereBreaker vb;
 
     @BeforeEach
     void setUp() {
         vb = new VigenereBreaker();
     }
 
-    @AfterEach
-    void tearDown() {
-    }
 
-    @DisplayName("Test slice string")
     @ParameterizedTest(name = "{index}=> message={0},whichSlice={1},totalSlices={2}, expected={3}")
     @CsvSource({
             "abcdefghijklm,0,3,adgjm ",
@@ -47,7 +43,6 @@ class VigenereBreakerTest {
     }
 
     @Test
-    @DisplayName("Test key length")
     void tryKeyLength() {
         int[] expected = {5, 11, 20, 19, 4};
         String encrypted = new FileResource("src/main/resources/data/athens_keyflute.txt").asString();

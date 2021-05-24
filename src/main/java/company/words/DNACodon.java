@@ -17,10 +17,11 @@ public class DNACodon {
      */
     public void buildCodonMap(int start, String dna) {
         System.out.print("Start " + start);
-        dna = dna.trim();
+        String dnaTrimmed = dna.trim();
+
         codonCount.clear();
-        while (dna.length() - start >= 3) {
-            String codon = dna.substring(start, start + 3);
+        while (dnaTrimmed.length() - start >= 3) {
+            String codon = dnaTrimmed.substring(start, start + 3);
             if (codonCount.containsKey(codon)) {
                 codonCount.put(codon, codonCount.get(codon) + 1);
             } else {

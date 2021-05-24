@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GladLib {
-    private static final String dataSourceURL = "http://dukelearntoprogram.com/course3/data";
+//    private static final String dataSourceURL = "http://dukelearntoprogram.com/course3/data";
     private static final String dataSourceDirectory = "main/data";
     private ArrayList<String> adjectiveList;
     private ArrayList<String> nounList;
