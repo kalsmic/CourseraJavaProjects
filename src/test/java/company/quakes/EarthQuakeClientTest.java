@@ -101,7 +101,6 @@ class EarthQuakeClientTest
     @CsvSource( {"start,Explosion,2", "end, California, 4", "any, Can,3"} )
     void filterByPhrase( String where, String phrase, int expected )
     {
-        quakeDataSmall = earthQuakeParser.read( "src/main/resources/data/nov20quakedata.atom" );
         ArrayList<QuakeEntry> quakesFilteredByPhrase = earthQuakeClient.filterByPhrase( quakeDataSmall, where, phrase );
         assertEquals( expected, quakesFilteredByPhrase.size() );
     }
