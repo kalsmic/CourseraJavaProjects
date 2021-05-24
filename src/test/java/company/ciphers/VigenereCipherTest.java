@@ -18,7 +18,6 @@ class VigenereCipherTest {
     @BeforeEach
     void setUp() {
         vc = new VigenereCipher(key);
-        ;
     }
 
     @AfterEach

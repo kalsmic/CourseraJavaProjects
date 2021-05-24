@@ -47,6 +47,7 @@ class LargestQuakesTest
         int maxIndex = largestQuakes.indexOfLargest( quakeDataSmall );
         assertEquals( 3, maxIndex );
         assertEquals( 5.50, quakeDataSmall.get( maxIndex ).getMagnitude() );
+        assertEquals( -1, largestQuakes.indexOfLargest( new ArrayList<QuakeEntry>() ));
     }
 
     @Test
@@ -54,12 +55,17 @@ class LargestQuakesTest
     void getLargest()
     {
         int howMany = 5;
-        ArrayList<QuakeEntry> largestQuakes = this.largestQuakes.getLargest( quakeDataSmall, howMany );
-        assertEquals( 5.50, largestQuakes.get( 0 ).getMagnitude() );
-        assertEquals( 5.10, largestQuakes.get( 1 ).getMagnitude() );
-        assertEquals( 5.10, largestQuakes.get( 2 ).getMagnitude() );
-        assertEquals( 5.00, largestQuakes.get( 3 ).getMagnitude() );
-        assertEquals( 4.90, largestQuakes.get( 4 ).getMagnitude() );
+        ArrayList<QuakeEntry> largestQuakesList = largestQuakes.getLargest( quakeDataSmall, howMany );
+        assertEquals( 5.50, largestQuakesList.get( 0 ).getMagnitude() );
+        assertEquals( 5.10, largestQuakesList.get( 1 ).getMagnitude() );
+        assertEquals( 5.10, largestQuakesList.get( 2 ).getMagnitude() );
+        assertEquals( 5.00, largestQuakesList.get( 3 ).getMagnitude() );
+        assertEquals( 4.90, largestQuakesList.get( 4 ).getMagnitude() );
+
+        // howMany > quakeDataSmall
+        howMany = 90;
+        largestQuakesList = largestQuakes.getLargest( quakeDataSmall, howMany );
+        assertEquals( largestQuakesList.size(), largestQuakesList.size() );
     }
 
     @Test
@@ -67,14 +73,14 @@ class LargestQuakesTest
     void getLargest2()
     {
         int howMany = 5;
-        ArrayList<QuakeEntry> largestQuakes = this.largestQuakes.getLargest( quakeDataBig, howMany );
+        ArrayList<QuakeEntry> largestQuakesList = largestQuakes.getLargest( quakeDataBig, howMany );
 
-        assertEquals( 7.00, largestQuakes.get( 0 ).getMagnitude() );
-        assertEquals( 6.50, largestQuakes.get( 1 ).getMagnitude() );
-        assertEquals( 5.90, largestQuakes.get( 2 ).getMagnitude() );
-        assertEquals( 5.80, largestQuakes.get( 3 ).getMagnitude() );
-        assertEquals( 5.70, largestQuakes.get( 4 ).getMagnitude() );
-        assertEquals( "128km WSW of Kushikino, Japan", largestQuakes.get( 4 ).getInfo() );
+        assertEquals( 7.00, largestQuakesList.get( 0 ).getMagnitude() );
+        assertEquals( 6.50, largestQuakesList.get( 1 ).getMagnitude() );
+        assertEquals( 5.90, largestQuakesList.get( 2 ).getMagnitude() );
+        assertEquals( 5.80, largestQuakesList.get( 3 ).getMagnitude() );
+        assertEquals( 5.70, largestQuakesList.get( 4 ).getMagnitude() );
+        assertEquals( "128km WSW of Kushikino, Japan", largestQuakesList.get( 4 ).getInfo() );
     }
 
 
