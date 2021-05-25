@@ -40,8 +40,7 @@ public class ClosestQuakes
 
                 // compare the distance of currLocation from current with
                 // distance of closestQuake from current
-                if ( currLocation.distanceTo( current ) < copy.get( minIndex ).getLocation().distanceTo(
-                        current ) )
+                if ( currLocation.distanceTo( current ) < copy.get( minIndex ).getLocation().distanceTo( current ) )
                 {
                     // set the minIndex to current index
                     minIndex = i;
