@@ -10,6 +10,7 @@ import main.java.company.quakes.PhraseFilter;
 import main.java.company.quakes.QuakeEntry;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -89,19 +90,17 @@ class EarthQuakeClientTest
 
     }
 
-    @Test
-    void filterByDepth2()
+    @ParameterizedTest( name = "{index} => minDepth ={0},maxDepth={1}, numberOfQuakes={2}" )
+    @CsvSource( {"-10000.0,-8000.0,172", " -12000.0,-10000.0,127", "-4000.0, -2000.0, 157"} )
+    void filterByDepth2( double minDepth, double maxDepth, int numberOfQuakes )
     {
-        double minDepth = -10000.0;
-        double maxDepth = -8000.0;
-
         ArrayList<QuakeEntry> quakeFilterByDepth = earthQuakeClient.filterByDepth( quakeDataBig, minDepth, maxDepth );
-        assertEquals( 172, quakeFilterByDepth.size() );
-
+        assertEquals( numberOfQuakes, quakeFilterByDepth.size() );
     }
 
     @ParameterizedTest( name = "{index} => where ={0},phrase={1}, expected={2}" )
     @CsvSource( {"start,Explosion,2", "end, California, 4", "any, Can,3"} )
+    @DisplayName( "Filter Quakes by Phrase in Small Data" )
     void filterByPhrase( String where, String phrase, int expected )
     {
         ArrayList<QuakeEntry> quakesFilteredByPhrase = earthQuakeClient.filterByPhrase( quakeDataSmall, where, phrase );
@@ -109,52 +108,13 @@ class EarthQuakeClientTest
     }
 
     @ParameterizedTest( name = "{index} => where ={0},phrase={1}, expected={2}" )
-    @CsvSource( {"start,Explosion,7", "end, California, 538", "any, Creek,9"} )
+    @CsvSource( {"start,Explosion,7", "end, California, 538", "any, Creek,9", "start,Quarry Blast,19",
+                        "end,Alaska,364","any,Can,58"} )
+    @DisplayName( "Filter Quakes by Phrase in Big Data" )
     void filterByPhrase2( String where, String phrase, int expected )
     {
         ArrayList<QuakeEntry> quakesFilteredByPhrase = earthQuakeClient.filterByPhrase( quakeDataBig, where, phrase );
         assertEquals( expected, quakesFilteredByPhrase.size() );
-    }
-
-
-    @Test
-    void filterByDistance()
-    {
-    }
-
-    @Test
-    void filter()
-    {
-        MatchAllFilter maf = new MatchAllFilter();
-        double distance = 10000000;
-        Location location = new Location( 35.42, 139.43 );
-        String phrase = "Japan";
-        String where = "end";
-
-        maf.addFilter( new DistanceFilter( location, distance ) );
-        maf.addFilter( new PhraseFilter( where, phrase ) );
-
-        ArrayList<QuakeEntry> quakes = earthQuakeClient.filter( quakeDataSmall, maf );
-        assertEquals( 2, quakes.size() );
-    }
-
-    @Test
-    void filter2()
-    {
-        MatchAllFilter maf = new MatchAllFilter();
-        double distance = 10000000;
-        Location location = new Location( 36.1314, -95.9372 );
-        String phrase = "Ca";
-        String where = "any";
-        double magMin = 0.0;
-        double magMax = 3.0;
-
-        maf.addFilter( new DistanceFilter( location, distance ) );
-        maf.addFilter( new PhraseFilter( where, phrase ) );
-        maf.addFilter( new MagnitudeFilter( magMin, magMax ) );
-
-        ArrayList<QuakeEntry> quakes = earthQuakeClient.filter( quakeDataSmall, maf );
-        assertEquals( 7, quakes.size() );
     }
 
 }

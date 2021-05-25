@@ -5,18 +5,19 @@ import main.java.company.quakes.DistanceFilter;
 import main.java.company.quakes.EarthQuakeClient;
 import main.java.company.quakes.EarthQuakeParser;
 import main.java.company.quakes.Location;
-import main.java.company.quakes.MagMaxFilter;
 import main.java.company.quakes.MagnitudeFilter;
 import main.java.company.quakes.MatchAllFilter;
 import main.java.company.quakes.PhraseFilter;
 import main.java.company.quakes.QuakeEntry;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,6 +29,7 @@ public class MatchAllFilterTest
     private ArrayList<QuakeEntry> quakeDataBig;
     private EarthQuakeParser earthQuakeParser;
     private EarthQuakeClient earthQuakeClient;
+    private HashMap<String, ArrayList<QuakeEntry>> sampleData;
 
     @BeforeAll
     void setUp()
@@ -37,6 +39,9 @@ public class MatchAllFilterTest
         quakeDataSmall = earthQuakeParser.read( "src/main/resources/data/nov20quakedatasmall.atom" );
         quakeDataBig = earthQuakeParser.read( "src/main/resources/data/nov20quakedata.atom" );
         earthQuakeClient = new EarthQuakeClient();
+        sampleData = new HashMap<>();
+        sampleData.put( "small", quakeDataSmall );
+        sampleData.put( "big", quakeDataBig );
 
     }
 
@@ -47,6 +52,7 @@ public class MatchAllFilterTest
         quakeDataSmall = null;
         quakeDataBig = null;
         earthQuakeParser = null;
+        sampleData = null;
     }
 
     private void checkRange( double value, double minValue, double maxValue )
@@ -57,161 +63,107 @@ public class MatchAllFilterTest
         assertTrue( value <= maxValue );
     }
 
-    @Test
-    void satisfies()
+    private void checkPhrase( String title, String where, String phrase )
     {
-        MatchAllFilter matchAllFilter = new MatchAllFilter();
-        matchAllFilter.addFilter( new MagMaxFilter( 10 ) );
-        matchAllFilter.addFilter( new PhraseFilter( "end", "Venezuela" ) );
-        matchAllFilter.addFilter( new MagnitudeFilter( 4.0, 6.0 ) );
-        assertTrue( matchAllFilter.satisfies( qe ) );
-
-        matchAllFilter.addFilter( new DepthFilter( -7000.00, -5000.00 ) );
-        assertFalse( matchAllFilter.satisfies( qe ) );
-    }
-
-    @Test
-    void testMultipleFilters1()
-    {
-        double magMin = 0.0;
-        double magMax = 2.0;
-        double minDepth = -100000.0;
-        double maxDepth = -10000.0;
-        MatchAllFilter maf = new MatchAllFilter();
-        maf.addFilter( new MagnitudeFilter( magMin, magMax ) );
-        maf.addFilter( new DepthFilter( minDepth, maxDepth ) );
-        maf.addFilter( new PhraseFilter( "any", "a" ) );
-        ArrayList<String> titles = new ArrayList<>(
-                List.of( "2km SE of Anza, California", "75km WSW of Cantwell, Alaska" ) );
-
-        ArrayList<QuakeEntry> quakes = earthQuakeClient.filter( quakeDataSmall, maf );
-        assertEquals( 2, quakes.size() );
-        for ( int idx = 0; idx < quakes.size(); idx++ )
+        switch ( where )
         {
-            assertEquals( titles.get( idx ), quakes.get( idx ).getInfo() );
-            checkRange( quakes.get( idx ).getDepth(), minDepth, maxDepth );
-            checkRange( quakes.get( idx ).getMagnitude(), magMin, magMax );
+            case "start":
+                assertTrue( title.startsWith( phrase ) );
+                break;
+            case "end":
+                assertTrue( title.endsWith( phrase ) );
+                break;
+            case "any":
+                assertTrue( title.contains( phrase ) );
+                break;
         }
     }
 
-    @Test
-    void testMultipleFilters2()
+    @ParameterizedTest( name = "{index} => latitude={0}, longitude={1}, distance={2}, where={3},phrase={4},num={5},sample={6}" )
+    @CsvSource( {
+                        "35.42, 139.43,10000,Japan,end,2,small",
+                        "35.42, 139.43,10000000,Japan,end,20,big",
+                        "39.7392,-104.9903,1000,a,end,74,big"} )
+    @DisplayName( "Filters used are: Distance Phrase" )
+    void testMultipleFiltersDistancePhrase( double latitude, double longitude, double distance, String phrase, String where, int num, String sample )
     {
-        double magMin = 0.0;
-        double magMax = 3.0;
-        double distance = 10000000;
-        String phrase = "Ca";
-
-        MatchAllFilter maf = new MatchAllFilter();
-        maf.addFilter( new MagnitudeFilter( magMin, magMax ) );
-
-        Location location = new Location( 36.1314, -95.9372 );
-        maf.addFilter( new DistanceFilter( location, distance ) );
-        maf.addFilter( new PhraseFilter( "any", phrase ) );
-
-        ArrayList<QuakeEntry> quakes = earthQuakeClient.filter( quakeDataSmall, maf );
-        assertEquals( 7, quakes.size() );
-        ArrayList<String> titles = new ArrayList<>( List.of( "2km SE of Anza, California", "66km E of Cantwell, Alaska",
-                "28km SSE of Carmel Valley Village, California", "75km WSW of Cantwell, Alaska",
-                "Quarry Blast - 7km SSW of Mojave, California", "Explosion - 8km SSE of Princeton, Canada",
-                "Quarry Blast - 4km WNW of Grand Terrace, California" ) );
-
-        for ( int idx = 0; idx < quakes.size(); idx++ )
-        {
-            assertEquals( titles.get( idx ), quakes.get( idx ).getInfo() );
-            checkRange( quakes.get( idx ).getMagnitude(), magMin, magMax );
-            assertTrue( quakes.get( idx ).getLocation().distanceTo( location ) < distance );
-            assertTrue( quakes.get( idx ).getInfo().contains( phrase ) );
-        }
-    }
-
-    @Test
-    void testMultipleFiltersBiGData1()
-    {
-        double distance = 10000000;
-        String phrase = "Japan";
-        Location location = new Location( 35.42, 139.43 );
+        Location location = new Location( latitude, longitude );
 
         MatchAllFilter matchAllFilter = new MatchAllFilter();
         matchAllFilter.addFilter( new DistanceFilter( location, distance ) );
-        matchAllFilter.addFilter( new PhraseFilter( "end", phrase ) );
+        matchAllFilter.addFilter( new PhraseFilter( where, phrase ) );
 
-        ArrayList<QuakeEntry> quakes = earthQuakeClient.filter( quakeDataBig, matchAllFilter );
-        assertEquals( 20, quakes.size() );
-        for ( int idx = 0; idx < quakes.size(); idx++ )
+        ArrayList<QuakeEntry> quakes = earthQuakeClient.filter( sampleData.get( sample ), matchAllFilter );
+        assertEquals( num, quakes.size() );
+        for ( QuakeEntry quake : quakes )
         {
-            assertTrue( quakes.get( idx ).getLocation().distanceTo( location ) < distance );
-            assertTrue( quakes.get( idx ).getInfo().endsWith( phrase ) );
+            assertTrue( quake.getLocation().distanceTo( location ) < distance * 1000 );
+            checkPhrase( quake.getInfo(), where, phrase );
+
         }
     }
 
-    @Test
-    void testMultipleFiltersBiGData2()
+    @ParameterizedTest( name = "{index} => magMin={0}, magMax={1},minDepth={2}, maxDepth={3},num={4},sample={5}" )
+    @CsvSource( {"4.0,5.0,-35000.0,-12000.0,24,big", "3.5,4.5,-55000.0,-20000.0,15,big", "0.0,2.0,-100000.0,-10000.0,2,small"} )
+    @DisplayName( "Filters used are: Magnitude Depth" )
+    void testMultipleFiltersMagnitudeDepth( double magMin, double magMax, double minDepth, double maxDepth, int num, String sample )
     {
-        double magMin = 4.0;
-        double magMax = 5.0;
-        double minDepth = -35000.0;
-        double maxDepth = -12000.0;
         MatchAllFilter maf = new MatchAllFilter();
         maf.addFilter( new MagnitudeFilter( magMin, magMax ) );
         maf.addFilter( new DepthFilter( minDepth, maxDepth ) );
-        ArrayList<QuakeEntry> quakes = earthQuakeClient.filter( quakeDataBig, maf );
+        ArrayList<QuakeEntry> quakes = earthQuakeClient.filter( sampleData.get( sample ), maf );
 
-        assertEquals( 24, quakes.size() );
-        for ( int idx = 0; idx < quakes.size(); idx++ )
+        assertEquals( num, quakes.size() );
+        for ( QuakeEntry quake : quakes )
         {
-            checkRange( quakes.get( idx ).getDepth(), minDepth, maxDepth );
-            checkRange( quakes.get( idx ).getMagnitude(), magMin, magMax );
+            checkRange( quake.getDepth(), minDepth, maxDepth );
+            checkRange( quake.getMagnitude(), magMin, magMax );
         }
     }
 
 
-    @Test
-    void testMultipleFilterBiGData3()
+    @ParameterizedTest( name = "{index} => magMin={0}, magMax={1},minDepth={2}, maxDepth={3}, where={4}phrase={5},num={6},sample={7}" )
+    @CsvSource( {"0.0,2.0,-100000.0,-10000.0,a,any,358,big", "1.0,4.0,-180000.0,-30000.0,o,any,187,big"} )
+    @DisplayName( "Filters used are: Magnitude Depth Phrase" )
+    void testMultipleFilterDistancePhrase( double magMin, double magMax, double minDepth, double maxDepth, String phrase, String where, int num, String sample )
     {
-        double magMin = 0.0;
-        double magMax = 2.0;
-        double minDepth = -100000.0;
-        double maxDepth = -10000.0;
-        String phrase = "a";
         MatchAllFilter maf = new MatchAllFilter();
         maf.addFilter( new MagnitudeFilter( magMin, magMax ) );
         maf.addFilter( new DepthFilter( minDepth, maxDepth ) );
-        maf.addFilter( new PhraseFilter( "any", phrase ) );
-        ArrayList<QuakeEntry> quakes = earthQuakeClient.filter( quakeDataBig, maf );
+        maf.addFilter( new PhraseFilter( where, phrase ) );
+        ArrayList<QuakeEntry> quakes = earthQuakeClient.filter( sampleData.get( sample ), maf );
 
-        assertEquals( 358, quakes.size() );
-        for ( int idx = 0; idx < quakes.size(); idx++ )
+        assertEquals( num, quakes.size() );
+        for ( QuakeEntry quake : quakes )
         {
-            checkRange( quakes.get( idx ).getDepth(), minDepth, maxDepth );
-            checkRange( quakes.get( idx ).getMagnitude(), magMin, magMax );
-            assertTrue( quakes.get( idx ).getInfo().contains( phrase ) );
+            checkRange( quake.getDepth(), minDepth, maxDepth );
+            checkRange( quake.getMagnitude(), magMin, magMax );
+            checkPhrase( quake.getInfo(), where, phrase );
         }
     }
 
-    @Test
-    void testMultipleFilterBiGData4()
+    @ParameterizedTest( name = "{index} => magMin={0}, magMax={1},latitude={2}, longitude={3}, distance={4}, where={5},phrase={6},num={7},sample={8}" )
+    @CsvSource( {
+                        "0.0,3.0,36.1314, -95.9372,10000,Ca,any,7,small",
+                        "0.0,3.0,36.1314,-95.9372,10000,Ca,any,616,big", "0.0,5.0,55.7308, 9.1153,3000,e,any,17,big"} )
+    @DisplayName( "Filters used are: Magnitude Distance Phrase" )
+    void testMultipleFilterMagnitudeDistancePhrase( double magMin, double magMax, double latitude, double longitude, double distance, String phrase, String where, int num, String sample )
     {
-        double magMin = 0.0;
-        double magMax = 3.0;
-        double distance = 10000;
-        String phrase = "Ca";
 
-        Location location = new Location( 36.1314, -95.9372 );
+        Location location = new Location( latitude, longitude );
 
         MatchAllFilter maf = new MatchAllFilter();
         maf.addFilter( new MagnitudeFilter( magMin, magMax ) );
         maf.addFilter( new DistanceFilter( location, distance ) );
-        maf.addFilter( new PhraseFilter( "any", phrase ) );
-        ArrayList<QuakeEntry> quakes = earthQuakeClient.filter( quakeDataBig, maf );
-        assertEquals( 616, quakes.size() );
-        for ( int idx = 0; idx < quakes.size(); idx++ )
+        maf.addFilter( new PhraseFilter( where, phrase ) );
+        ArrayList<QuakeEntry> quakes = earthQuakeClient.filter( sampleData.get( sample ), maf );
+        assertEquals( num, quakes.size() );
+        for ( QuakeEntry quake : quakes )
         {
-            assertTrue( quakes.get( idx ).getLocation().distanceTo( location ) < distance * 1000 );
-            checkRange( quakes.get( idx ).getMagnitude(), magMin, magMax );
-            assertTrue( quakes.get( idx ).getInfo().contains( phrase ) );
+            assertTrue( quake.getLocation().distanceTo( location ) < distance * 1000 );
+            checkRange( quake.getMagnitude(), magMin, magMax );
+            checkPhrase( quake.getInfo(), where, phrase );
+
         }
     }
-
-
 }

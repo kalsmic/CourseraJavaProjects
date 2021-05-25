@@ -47,7 +47,7 @@ class LargestQuakesTest
         int maxIndex = largestQuakes.indexOfLargest( quakeDataSmall );
         assertEquals( 3, maxIndex );
         assertEquals( 5.50, quakeDataSmall.get( maxIndex ).getMagnitude() );
-        assertEquals( -1, largestQuakes.indexOfLargest( new ArrayList<QuakeEntry>() ) );
+        assertEquals( -1, largestQuakes.indexOfLargest( new ArrayList<>() ) );
     }
 
     @Test
@@ -66,13 +66,14 @@ class LargestQuakesTest
         howMany = 90;
         largestQuakesList = largestQuakes.getLargest( quakeDataSmall, howMany );
         assertEquals( largestQuakesList.size(), largestQuakesList.size() );
+
     }
 
     @Test
     @DisplayName( "Get largest QuakeEntries in descending order--Big data" )
     void getLargest2()
     {
-        int howMany = 5;
+        int howMany = 100;
         ArrayList<QuakeEntry> largestQuakesList = largestQuakes.getLargest( quakeDataBig, howMany );
 
         assertEquals( 7.00, largestQuakesList.get( 0 ).getMagnitude() );
@@ -81,6 +82,9 @@ class LargestQuakesTest
         assertEquals( 5.80, largestQuakesList.get( 3 ).getMagnitude() );
         assertEquals( 5.70, largestQuakesList.get( 4 ).getMagnitude() );
         assertEquals( "128km WSW of Kushikino, Japan", largestQuakesList.get( 4 ).getInfo() );
+        assertEquals( 5.10, largestQuakesList.get( 19 ).getMagnitude() );
+        assertEquals( "79km SSW of Fukue, Japan", largestQuakesList.get( 49 ).getInfo() );
+
     }
 
 

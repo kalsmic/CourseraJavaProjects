@@ -136,7 +136,7 @@ public class EarthQuakeClient
             if ( maf.satisfies( qe ) )
             {
                 quakes.add( qe );
-                System.out.println( qe );
+//                System.out.println( qe );
             }
         }
         System.out.println( maf.getName() );
