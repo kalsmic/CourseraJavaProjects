@@ -2,10 +2,10 @@ package main.java.company.quakes;
 
 public class QuakeEntry implements Comparable<QuakeEntry>{
 	
-	private Location myLocation;
-	private String title;
-	private double depth;
-	private double magnitude;
+	private final Location myLocation;
+	private final String title;
+	private final double depth;
+	private final double magnitude;
 
 	public QuakeEntry(double lat, double lon, double mag, 
 	                  String t, double d) {

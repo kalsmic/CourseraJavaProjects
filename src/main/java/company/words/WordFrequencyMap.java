@@ -8,7 +8,7 @@ public class WordFrequencyMap {
     private final HashMap<String, Integer> wordFrequencies;
 
     public WordFrequencyMap() {
-        wordFrequencies = new HashMap<String, Integer>();
+        wordFrequencies = new HashMap<>();
     }
 
     public void findUnique(FileResource resource) {

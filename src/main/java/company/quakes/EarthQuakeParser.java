@@ -47,9 +47,7 @@ public class EarthQuakeParser
         {
             DocumentBuilder builder = factory.newDocumentBuilder();
 
-            //Document document = builder.parse(new File(source));
-            //Document document = builder.parse("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.atom");
-            Document document = null;
+            Document document;
 
             if ( source.startsWith( "http" ) )
             {
@@ -63,7 +61,7 @@ public class EarthQuakeParser
 
             NodeList nodeList = document.getDocumentElement().getChildNodes();
 
-            ArrayList<QuakeEntry> list = new ArrayList<QuakeEntry>();
+            ArrayList<QuakeEntry> list = new ArrayList<>();
 
             for ( int k = 0; k < nodeList.getLength(); k++ )
             {

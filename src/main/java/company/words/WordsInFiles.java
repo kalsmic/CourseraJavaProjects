@@ -12,7 +12,7 @@ public class WordsInFiles {
     private final HashMap<String, ArrayList<String>> wordFileMap;
 
     public WordsInFiles() {
-        wordFileMap = new HashMap<String, ArrayList<String>>();
+        wordFileMap = new HashMap<>();
     }
 
     public void addWordsFromFile(File f) {
@@ -25,7 +25,7 @@ public class WordsInFiles {
                 wordFileMap.get(word).add(f.getName());
             } else {
                 // create a new arraylist of Strings
-                ArrayList<String> fileList = new ArrayList<String>(List.of(f.getName()));
+                ArrayList<String> fileList = new ArrayList<>( List.of( f.getName() ) );
                 // add word and array list to wordFileMap dictionary
                 wordFileMap.put(word, fileList);
             }
@@ -59,7 +59,7 @@ public class WordsInFiles {
      * @return an ArrayList of words that appear in exactly number file
      */
     public ArrayList<String> wordsInNumFiles(int number) {
-        ArrayList<String> words = new ArrayList<String>();
+        ArrayList<String> words = new ArrayList<>();
 
         for (String word : wordFileMap.keySet()) {
             int numberOfFiles = wordFileMap.get(word).size();

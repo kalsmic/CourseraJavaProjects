@@ -25,4 +25,14 @@ class CaesarBreakerTest {
 
 
     }
+    // TODO add tests
+//    @Test
+//    void getKey()
+//    {
+//    }
+//
+//    @Test
+//    void breakCaesarCipher()
+//    {
+//    }
 }

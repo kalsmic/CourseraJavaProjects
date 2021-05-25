@@ -9,8 +9,8 @@ public class WordFrequency {
     private final ArrayList<Integer> myFreqs;
 
     public WordFrequency() {
-        myWords = new ArrayList<String>();
-        myFreqs = new ArrayList<Integer>();
+        myWords = new ArrayList<>();
+        myFreqs = new ArrayList<>();
     }
 
     public void findUnique(FileResource resource) {

@@ -9,8 +9,8 @@ public class CharactersInPlay {
     private final ArrayList<Integer> numSpeakingParts;
 
     public CharactersInPlay() {
-        characterNames = new ArrayList<String>();
-        numSpeakingParts = new ArrayList<Integer>();
+        characterNames = new ArrayList<>();
+        numSpeakingParts = new ArrayList<>();
     }
 
     /**

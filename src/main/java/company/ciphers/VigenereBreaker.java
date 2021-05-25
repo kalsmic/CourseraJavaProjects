@@ -75,7 +75,7 @@ public class VigenereBreaker {
      * @return the HashSet representing the words in a dictionary
      */
     public HashSet<String> readDictionary(FileResource fr) {
-        HashSet<String> dictionary = new HashSet<String>();
+        HashSet<String> dictionary = new HashSet<>();
 
         for (String word : fr.lines()) {
             dictionary.add(word.toLowerCase());
@@ -91,7 +91,7 @@ public class VigenereBreaker {
     public int countWords(String message, HashSet<String> dictionary) {
         int count = 0;
         // split the message into an array of string words
-        ArrayList<String> messageArray = new ArrayList<String>(List.of(message.toLowerCase().split("\\W+")));
+        ArrayList<String> messageArray = new ArrayList<>( List.of( message.toLowerCase().split( "\\W+" ) ) );
 
         for (String word : messageArray) {
             if (dictionary.contains(word)) {

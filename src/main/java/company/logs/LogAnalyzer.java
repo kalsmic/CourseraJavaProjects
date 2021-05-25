@@ -9,7 +9,7 @@ public class LogAnalyzer {
     private final ArrayList<LogEntry> records;
 
     public LogAnalyzer() {
-        records = new ArrayList<LogEntry>();
+        records = new ArrayList<>();
 
     }
 
@@ -26,7 +26,7 @@ public class LogAnalyzer {
      */
     public int countUniqueIPs() {
         // uniqueIPs starts as an empty list
-        ArrayList<String> uniqueIPs = new ArrayList<String>();
+        ArrayList<String> uniqueIPs = new ArrayList<>();
         // for each element le in records
         for (LogEntry le : records) {
             //  ipAddress is not in uniqueIPs
@@ -62,7 +62,7 @@ public class LogAnalyzer {
      * @return an ArrayList of Strings of unique IP addresses that had access on the given day
      */
     public ArrayList<String> uniqueIPVisitsOnDay(String someday) {
-        ArrayList<String> uniqueIPVisits = new ArrayList<String>();
+        ArrayList<String> uniqueIPVisits = new ArrayList<>();
         for (LogEntry le : records) {
 
             String ipAddress = le.getIpAddress();
@@ -81,7 +81,7 @@ public class LogAnalyzer {
      * in the range from low to high, inclusive
      */
     public int countUniqueIPsInRange(int low, int high) {
-        ArrayList<String> uniqueIPs = new ArrayList<String>();
+        ArrayList<String> uniqueIPs = new ArrayList<>();
         for (LogEntry le : records) {
             int statusCode = le.getStatusCode();
             String ipAddress = le.getIpAddress();
@@ -98,7 +98,7 @@ public class LogAnalyzer {
      */
     public HashMap<String, Integer> countVisitsPerIP() {
         // Make empty hashmap to store visits
-        HashMap<String, Integer> counts = new HashMap<String, Integer>();
+        HashMap<String, Integer> counts = new HashMap<>();
 
         // for each log entry in records
         for (LogEntry le : records) {
@@ -152,7 +152,7 @@ public class LogAnalyzer {
         // Get the maximum number of visits
         int maximumNumVisits = mostNumberVisitsByIP(counts);
         // create an Array lists of strings to store the Ipaddress with maximum Number of visits
-        ArrayList<String> maxNumVisitsList = new ArrayList<String>();
+        ArrayList<String> maxNumVisitsList = new ArrayList<>();
 
         // for each ipaddress record
         for (String ip : counts.keySet()) {
@@ -172,7 +172,7 @@ public class LogAnalyzer {
     public HashMap<String, ArrayList<String>> iPsForDays() {
 //        Mon Mar 16
         // create HashMap to store an array list of ips visits on a given day
-        HashMap<String, ArrayList<String>> iPsForDaysDict = new HashMap<String, ArrayList<String>>();
+        HashMap<String, ArrayList<String>> iPsForDaysDict = new HashMap<>();
         // for Log Entry
         for (LogEntry le : records) {
             String day = le.getAccessTime().toString().substring(4, 10);
@@ -183,7 +183,7 @@ public class LogAnalyzer {
                 iPsForDaysDict.get(day).add(ip);
             } else {
 //                create the day and add the ip address
-                ArrayList<String> ips = new ArrayList<String>();
+                ArrayList<String> ips = new ArrayList<>();
                 ips.add(ip);
                 iPsForDaysDict.put(day, ips);
             }
@@ -223,10 +223,10 @@ public class LogAnalyzer {
      */
     public ArrayList<String> iPsWithMostVisitsOnDay(HashMap<String, ArrayList<String>> ipsForDays, String day) {
         // create an arraylist of Strings to store the ip addresses
-        ArrayList<String> ipsWithMostVisitsOnDay = new ArrayList<String>();
+        ArrayList<String> ipsWithMostVisitsOnDay = new ArrayList<>();
 
 //        // create new  HashMap<String, Integer> to store ip visit counts for the day;
-        HashMap<String, Integer> ipsForDaysFiltered = new HashMap<String, Integer>();
+        HashMap<String, Integer> ipsForDaysFiltered = new HashMap<>();
 
         // Check if day exists in the ipsForDays
         if (ipsForDays.containsKey(day)) {

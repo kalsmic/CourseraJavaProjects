@@ -2,8 +2,7 @@ package main.java.company.ciphers;
 
 public class CaesarBreaker {
 
-    private char mostCommon;
-    private final String alphabet = "abcdefghijklmnopqrstuvwxyz";
+    private final char mostCommon;
 
     public CaesarBreaker() {
         mostCommon = 'e';
@@ -25,6 +24,7 @@ public class CaesarBreaker {
         for (int index = 0; index < words.length(); index++) {
 
             char currChar = Character.toLowerCase(words.charAt(index));
+            String alphabet = "abcdefghijklmnopqrstuvwxyz";
             int alphabeticIndex = alphabet.indexOf(currChar);
 
             if (alphabeticIndex != -1) {

@@ -45,7 +45,7 @@ public class GladLib
         timeList = readIt( source + "/timeframe.txt" );
         fruitList = readIt( source + "/fruit.txt/" );
         verbList = readIt( source + "/verb.txt" );
-        seenList = new ArrayList<String>();
+        seenList = new ArrayList<>();
     }
 
     private String randomFrom( ArrayList<String> source )
@@ -146,7 +146,7 @@ public class GladLib
 
     private ArrayList<String> readIt( String source )
     {
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
         if ( source.startsWith( "http" ) )
         {
             URLResource resource = new URLResource( source );

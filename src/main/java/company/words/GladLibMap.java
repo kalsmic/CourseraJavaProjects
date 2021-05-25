@@ -11,13 +11,13 @@ public class GladLibMap {
 //    private static final String dataSourceURL = "http://dukelearntoprogram.com/course3/data";
     private static final String dataSourceDirectory = "main/data";
     private final HashMap<String, ArrayList<String>> myMap;
-    private final HashMap<String, String> myLabelSource = new HashMap<String, String>();
+    private final HashMap<String, String> myLabelSource = new HashMap<>();
     private final Random myRandom;
     private ArrayList<String> wordsConsideredList;
 
     public GladLibMap() {
 
-        myMap = new HashMap<String, ArrayList<String>>();
+        myMap = new HashMap<>();
         initializeFromSource(dataSourceDirectory);
         myRandom = new Random();
     }
@@ -31,11 +31,6 @@ public class GladLibMap {
             ArrayList<String> list = readIt(source + "/" + s + ".txt");
             myMap.put(s, list);
         }
-//         TODO load sources using a .property file
-//        for (String s : myLabelSource.keySet()) {
-//            ArrayList<String> list = readIt(myLabelSource.get(s));
-//            myMap.put(s, list);
-//        }
     }
 
     private String getSubstitute(String label) {
@@ -72,7 +67,7 @@ public class GladLibMap {
      * @return Arraylist of words in file
      */
     private ArrayList<String> readIt(String source) {
-        ArrayList<String> wordList = new ArrayList<String>();
+        ArrayList<String> wordList = new ArrayList<>();
         if (source.startsWith("http")) {
             URLResource resource = new URLResource(source);
             for (String line : resource.lines()) {

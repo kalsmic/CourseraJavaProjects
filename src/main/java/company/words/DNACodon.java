@@ -6,7 +6,7 @@ public class DNACodon {
     private final HashMap<String, Integer> codonCount;
 
     public DNACodon() {
-        codonCount = new HashMap<String, Integer>();
+        codonCount = new HashMap<>();
     }
 
     /**
