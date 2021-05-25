@@ -8,8 +8,8 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LogEntryTest {
-    private Date date = new Date();
-    private LogEntry logEntry = new LogEntry("192.168.1.1", date, "GET /favicon.ico HTTP/1.1", 200, 600);
+    private final Date date = new Date();
+    private final LogEntry logEntry = new LogEntry("192.168.1.1", date, "GET /favicon.ico HTTP/1.1", 200, 600);
 
 
     @Test

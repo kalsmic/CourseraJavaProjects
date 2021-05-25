@@ -47,7 +47,7 @@ class LargestQuakesTest
         int maxIndex = largestQuakes.indexOfLargest( quakeDataSmall );
         assertEquals( 3, maxIndex );
         assertEquals( 5.50, quakeDataSmall.get( maxIndex ).getMagnitude() );
-        assertEquals( -1, largestQuakes.indexOfLargest( new ArrayList<QuakeEntry>() ));
+        assertEquals( -1, largestQuakes.indexOfLargest( new ArrayList<QuakeEntry>() ) );
     }
 
     @Test
