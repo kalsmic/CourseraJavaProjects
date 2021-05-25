@@ -33,7 +33,6 @@ public class DistanceFilterTest
     @CsvSource( {"35.988,-78.907,1000,false", "38.17,-118.82,10000,true"} )
     void satisfies( double latitude, double longitude, double distance, boolean expected )
     {
-        distance = distance * distance;
         Location location = new Location( latitude, longitude );
         Filter f = new DistanceFilter( location, distance );
         assertEquals( expected, f.satisfies( qe ) );

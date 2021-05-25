@@ -28,11 +28,11 @@ public class MagMaxFilterTest
         qe = null;
     }
 
-    @ParameterizedTest(name = "{index} => magMin={0}, expected={1}")
+    @ParameterizedTest( name = "{index} => magMin={0}, expected={1}" )
     @CsvSource( {"4.0, false", "10,true"} )
-    void satisfies(double magMax, boolean expected)
+    void satisfies( double magMax, boolean expected )
     {
-        Filter f = new MagMaxFilter(magMax);
+        Filter f = new MagMaxFilter( magMax );
         assertEquals( expected, f.satisfies( qe ) );
     }
 

@@ -30,7 +30,7 @@ public class PhraseFilterTest
     }
 
     @ParameterizedTest( name = "{index} => where={0},phrase={1},expected={2}" )
-    @CsvSource( {"start,Explosion,false", "end, Venezuela, true", "any, Uganda,false", "any,venezuela,true"} )
+    @CsvSource( {"start,Explosion,false", "end, Venezuela, true", "any, Uganda,false", "any,Venezuela,true"} )
     void satisfies( String where, String phrase, boolean expected )
     {
         Filter f = new PhraseFilter( where, phrase );

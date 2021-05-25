@@ -2,6 +2,7 @@ package main.java.company.quakes;
 
 public class DepthFilter implements Filter
 {
+    private static final String name = "Depth";
     private final double minDepth;
     private final double maxDepth;
 
@@ -26,5 +27,10 @@ public class DepthFilter implements Filter
         return ( qe.getDepth() >= minDepth && qe.getDepth() <= maxDepth );
     }
 
+    @Override
+    public String getName()
+    {
+        return DepthFilter.name;
+    }
 
 }

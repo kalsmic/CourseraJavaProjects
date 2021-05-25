@@ -1,4 +1,5 @@
 package main.java.company.quakes;
+//
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -14,11 +15,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
 public class EarthQuakeParser
 {
-
-
     public EarthQuakeParser()
     {
         // TODO Auto-generated constructor stub
@@ -27,8 +25,7 @@ public class EarthQuakeParser
     public static void main( String[] args ) throws ParserConfigurationException, SAXException, IOException
     {
         EarthQuakeParser xp = new EarthQuakeParser();
-        //String source = "data/2.5_week.atom";
-        String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+        String source = "data/nov20quakedata.atom";
         ArrayList<QuakeEntry> list = xp.read( source );
         Collections.sort( list );
         for ( QuakeEntry loc : list )
@@ -47,7 +44,7 @@ public class EarthQuakeParser
         {
             DocumentBuilder builder = factory.newDocumentBuilder();
 
-            Document document;
+            Document document = null;
 
             if ( source.startsWith( "http" ) )
             {
@@ -89,7 +86,7 @@ public class EarthQuakeParser
                     {
                         String s2 = t2.item( 0 ).getChildNodes().item( 0 ).getNodeValue();
 
-                        String mags = s2.substring( 2, 5 );
+                        String mags = s2.substring( 2, s2.indexOf( " ", 2 ) );
                         if ( mags.contains( "?" ) )
                         {
                             mag = 0.0;
@@ -98,6 +95,7 @@ public class EarthQuakeParser
                         else
                         {
                             mag = Double.parseDouble( mags );
+                            //System.out.println("mag= "+mag);
                         }
                         int sp = s2.indexOf( " ", 5 );
                         title = s2.substring( sp + 1 );
@@ -107,7 +105,7 @@ public class EarthQuakeParser
                             title = title.substring( pos + 1 );
                         }
                     }
-                    if ( t2 != null )
+                    if ( t3 != null )
                     {
                         String s2 = t3.item( 0 ).getChildNodes().item( 0 ).getNodeValue();
                         depth = Double.parseDouble( s2 );
@@ -133,4 +131,5 @@ public class EarthQuakeParser
         }
         return null;
     }
+
 }

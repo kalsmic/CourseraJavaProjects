@@ -126,4 +126,24 @@ public class EarthQuakeClient
 
     }
 
+    public ArrayList<QuakeEntry> filter( ArrayList<QuakeEntry> list, MatchAllFilter maf )
+    {
+        ArrayList<QuakeEntry> quakes = new ArrayList<>();
+
+        // look at each QuakeEntry
+        for ( QuakeEntry qe : list )
+        {
+            if ( maf.satisfies( qe ) )
+            {
+                quakes.add( qe );
+                System.out.println( qe );
+            }
+        }
+        System.out.println( maf.getName() );
+        System.out.println( "Total records are " + list.size() );
+        System.out.println( "Total matches are " + quakes.size() );
+        return quakes;
+
+    }
+
 }

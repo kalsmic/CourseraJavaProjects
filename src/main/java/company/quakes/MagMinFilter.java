@@ -2,6 +2,8 @@ package main.java.company.quakes;
 
 public class MagMinFilter implements Filter
 {
+    private static final String name = "MagMin";
+
     private final double magMin;
 
     /**
@@ -21,5 +23,11 @@ public class MagMinFilter implements Filter
     public boolean satisfies( QuakeEntry qe )
     {
         return qe.getMagnitude() >= magMin;
+    }
+
+    @Override
+    public String getName()
+    {
+        return MagMinFilter.name;
     }
 }

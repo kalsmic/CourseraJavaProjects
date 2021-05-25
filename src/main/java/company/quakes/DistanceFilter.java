@@ -2,6 +2,7 @@ package main.java.company.quakes;
 
 public class DistanceFilter implements Filter
 {
+    private static final String name = "Distance";
     private final Location location;
     private final double distance;
 
@@ -12,7 +13,7 @@ public class DistanceFilter implements Filter
     public DistanceFilter( Location location, double distance )
     {
         this.location = location;
-        this.distance = distance;
+        this.distance = distance * 1000;
     }
 
     /**
@@ -24,5 +25,11 @@ public class DistanceFilter implements Filter
     public boolean satisfies( QuakeEntry qe )
     {
         return qe.getLocation().distanceTo( location ) < distance;
+    }
+
+    @Override
+    public String getName()
+    {
+        return DistanceFilter.name;
     }
 }

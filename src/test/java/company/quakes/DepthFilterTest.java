@@ -29,18 +29,20 @@ public class DepthFilterTest
     }
 
     @Test
-    void satisfiesReturnsTrue(){
+    void satisfiesReturnsTrue()
+    {
         double maxDepth = -6000;
         double minDepth = -25160.00;
-        Filter f = new DepthFilter(minDepth,maxDepth);
+        Filter f = new DepthFilter( minDepth, maxDepth );
         assertTrue( f.satisfies( qe ) );
     }
 
     @Test
-    void satisfiesReturnsFalse(){
+    void satisfiesReturnsFalse()
+    {
         double maxDepth = -7000.00;
         double minDepth = -5000.00;
-        Filter f = new DepthFilter(minDepth,maxDepth);
+        Filter f = new DepthFilter( minDepth, maxDepth );
         assertFalse( f.satisfies( qe ) );
     }
 }
