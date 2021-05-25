@@ -28,11 +28,11 @@ public class MagMinFilterTest
         qe = null;
     }
 
-    @ParameterizedTest(name = "{index} => magMin={0}, expected={1}")
+    @ParameterizedTest( name = "{index} => magMin={0}, expected={1}" )
     @CsvSource( {"4.0, true", "10,false"} )
-    void satisfies(double magMin, boolean expected)
+    void satisfies( double magMin, boolean expected )
     {
-        Filter f = new MagMinFilter(magMin);
+        Filter f = new MagMinFilter( magMin );
         assertEquals( expected, f.satisfies( qe ) );
     }
 

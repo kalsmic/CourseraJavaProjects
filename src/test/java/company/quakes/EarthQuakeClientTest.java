@@ -1,11 +1,15 @@
 package test.java.company.quakes;
 
+import main.java.company.quakes.DistanceFilter;
 import main.java.company.quakes.EarthQuakeClient;
 import main.java.company.quakes.EarthQuakeParser;
 import main.java.company.quakes.Location;
+import main.java.company.quakes.MagnitudeFilter;
+import main.java.company.quakes.MatchAllFilter;
+import main.java.company.quakes.PhraseFilter;
 import main.java.company.quakes.QuakeEntry;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,7 +28,7 @@ class EarthQuakeClientTest
     private EarthQuakeClient earthQuakeClient;
     private EarthQuakeParser earthQuakeParser;
 
-    @BeforeAll
+    @BeforeEach
     void setUp()
     {
         earthQuakeParser = new EarthQuakeParser();
@@ -34,7 +38,7 @@ class EarthQuakeClientTest
 
     }
 
-    @AfterAll
+    @AfterEach
     void tearDown()
     {
         earthQuakeClient = null;
@@ -68,7 +72,6 @@ class EarthQuakeClientTest
 
         //  Bridgeport, CA (38.17, -118.82)
         from = new Location( 38.17, -118.82 );
-        ;
 
         quakesFilteredByDistanceFrom = earthQuakeClient.filterByDistance( quakeDataSmall, distMax, from );
         assertEquals( 7, quakesFilteredByDistanceFrom.size() );
@@ -112,4 +115,46 @@ class EarthQuakeClientTest
         ArrayList<QuakeEntry> quakesFilteredByPhrase = earthQuakeClient.filterByPhrase( quakeDataBig, where, phrase );
         assertEquals( expected, quakesFilteredByPhrase.size() );
     }
+
+
+    @Test
+    void filterByDistance()
+    {
+    }
+
+    @Test
+    void filter()
+    {
+        MatchAllFilter maf = new MatchAllFilter();
+        double distance = 10000000;
+        Location location = new Location( 35.42, 139.43 );
+        String phrase = "Japan";
+        String where = "end";
+
+        maf.addFilter( new DistanceFilter( location, distance ) );
+        maf.addFilter( new PhraseFilter( where, phrase ) );
+
+        ArrayList<QuakeEntry> quakes = earthQuakeClient.filter( quakeDataSmall, maf );
+        assertEquals( 2, quakes.size() );
+    }
+
+    @Test
+    void filter2()
+    {
+        MatchAllFilter maf = new MatchAllFilter();
+        double distance = 10000000;
+        Location location = new Location( 36.1314, -95.9372 );
+        String phrase = "Ca";
+        String where = "any";
+        double magMin = 0.0;
+        double magMax = 3.0;
+
+        maf.addFilter( new DistanceFilter( location, distance ) );
+        maf.addFilter( new PhraseFilter( where, phrase ) );
+        maf.addFilter( new MagnitudeFilter( magMin, magMax ) );
+
+        ArrayList<QuakeEntry> quakes = earthQuakeClient.filter( quakeDataSmall, maf );
+        assertEquals( 7, quakes.size() );
+    }
+
 }

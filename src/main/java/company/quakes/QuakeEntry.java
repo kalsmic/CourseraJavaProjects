@@ -44,24 +44,24 @@ public class QuakeEntry implements Comparable<QuakeEntry>
         if ( Math.abs( difflat ) < 0.001 )
         {
             double diff = myLocation.getLongitude() - loc.myLocation.getLongitude();
-			if ( diff < 0 )
-			{
-				return -1;
-			}
-			if ( diff > 0 )
-			{
-				return 1;
-			}
+            if ( diff < 0 )
+            {
+                return -1;
+            }
+            if ( diff > 0 )
+            {
+                return 1;
+            }
             return 0;
         }
-		if ( difflat < 0 )
-		{
-			return -1;
-		}
-		if ( difflat > 0 )
-		{
-			return 1;
-		}
+        if ( difflat < 0 )
+        {
+            return -1;
+        }
+        if ( difflat > 0 )
+        {
+            return 1;
+        }
 
         // never reached
         return 0;

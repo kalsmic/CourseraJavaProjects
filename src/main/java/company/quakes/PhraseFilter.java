@@ -2,8 +2,10 @@ package main.java.company.quakes;
 
 public class PhraseFilter implements Filter
 {
+    private static final String name = "Phrase";
     private final String phrase;
     private final String where;
+
 
     /**
      * @param where  is a String representing the type of request that indicates where to search in the title and has
@@ -12,8 +14,8 @@ public class PhraseFilter implements Filter
      */
     public PhraseFilter( String where, String phrase )
     {
-        this.phrase = phrase.toLowerCase();
-        this.where = where.toLowerCase();
+        this.phrase = phrase;
+        this.where = where;
     }
 
     /**
@@ -27,14 +29,20 @@ public class PhraseFilter implements Filter
         switch ( where )
         {
             case "start":
-                return qe.getInfo().toLowerCase().startsWith( phrase );
+                return qe.getInfo().startsWith( phrase );
             case "end":
-                return qe.getInfo().toLowerCase().endsWith( phrase );
+                return qe.getInfo().endsWith( phrase );
             case "any":
-                return qe.getInfo().toLowerCase().contains( phrase );
+                return qe.getInfo().contains( phrase );
             default:
                 return false;
         }
 
+    }
+
+    @Override
+    public String getName()
+    {
+        return PhraseFilter.name;
     }
 }

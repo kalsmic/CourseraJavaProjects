@@ -2,8 +2,10 @@ package main.java.company.quakes;
 
 public class MagnitudeFilter implements Filter
 {
+    private static final String name = "Magnitude";
     private final MagMinFilter magMinFilter;
     private final MagMaxFilter magMaxFilter;
+
 
     /**
      * @param magMin is the minimum magnitude of the earthquake
@@ -26,4 +28,9 @@ public class MagnitudeFilter implements Filter
         return ( magMinFilter.satisfies( qe ) && magMaxFilter.satisfies( qe ) );
     }
 
+    @Override
+    public String getName()
+    {
+        return MagnitudeFilter.name;
+    }
 }
